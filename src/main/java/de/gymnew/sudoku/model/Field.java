@@ -1,8 +1,7 @@
 package de.gymnew.sudoku.model;
 
-public class Feld {
+public class Field {
 
 	private byte value; // 0 = undefined
-	
 	
 }
