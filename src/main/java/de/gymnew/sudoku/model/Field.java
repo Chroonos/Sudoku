@@ -10,4 +10,11 @@ public class Field {
 	private Column col;
 	private Block block;
 	
+	public byte getValue() {
+		return value;
+	}
+	public void setValue(byte value) {
+		this.value = value;
+	}
+	
 }
