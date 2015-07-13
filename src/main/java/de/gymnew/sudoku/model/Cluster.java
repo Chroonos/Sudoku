@@ -1,13 +1,14 @@
 package de.gymnew.sudoku.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public abstract class Cluster {
 
-	private Set<Field> fields;
-
-	public Cluster(Set<Field> fields) {
-		this.fields = fields;
+	protected Set<Field> fields;
+	
+	protected Cluster() {
+		fields = new HashSet<Field>();
 	}
 
 	public Set<Field> getFields() {
@@ -25,10 +26,9 @@ public abstract class Cluster {
 	public byte countNotes(byte note) {
 		byte count = 0;
 		for (Field f : fields) {
-			if (f.getNotes() == note)
+			if (f.hasNote(note))
 				count++;
 		}
 		return count;
 	}
-
 }
