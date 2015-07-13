@@ -12,6 +12,11 @@ public class SudokuPanel extends JPanel {
 	private static final int FIELD_SIZE = 10;
 	private static final int NUMBER_SIZE = 8;
 	
+	private static final int BLOCK_SEPARATOR_WIDTH = 3;
+	
+	private static final int OFFSET_LEFT = 10;
+	private static final int OFFSET_TOP = 10;
+	
 	private Sudoku sudoku;
 	private int selectX, selectY;
 	

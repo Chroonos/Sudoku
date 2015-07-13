@@ -2,6 +2,8 @@ package de.gymnew.sudoku.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
@@ -28,8 +30,15 @@ public class MainFrame extends JFrame {
 		setTitle("SudokuSolver");
 		
 		panel = new SudokuPanel();
-		
+		panel.addMouseListener(handler);
 		setContentPane(panel);
+		
+		addWindowListener(new WindowAdapter(){
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				handler.onMenuQuit();
+			}
+		});
 		
 		/*==================================================*/
 		// The Menu
@@ -62,6 +71,17 @@ public class MainFrame extends JFrame {
 		
 		menuSudoku.addSeparator();
 		
+		JMenuItem itemCredits = new JMenuItem("Credits");
+		itemCredits.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				handler.onMenuCredits();
+			}
+		});
+		menuSudoku.add(itemCredits);
+		
+		menuSudoku.addSeparator();
+		
 		JMenuItem itemQuit = new JMenuItem("Beenden");
 		itemQuit.addActionListener(new ActionListener(){
 			@Override
@@ -88,7 +108,7 @@ public class MainFrame extends JFrame {
 		itemSolverStop.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				handler.onMenuStartSolver();
+				handler.onMenuStopSolver();
 			}
 		});
 		menuSolve.add(itemSolverStop);

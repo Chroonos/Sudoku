@@ -68,4 +68,14 @@ public class MainFrameHandler implements MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
+
+	public void onMenuCredits() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void onMenuStopSolver() {
+		// TODO Auto-generated method stub
+		
+	}
 }
