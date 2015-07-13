@@ -2,6 +2,7 @@ package de.gymnew.sudoku.model;
 
 import java.util.Set;
 
+//Singed
 public class Field {
 
 	private byte value; // 0 = undefined
@@ -22,8 +23,8 @@ public class Field {
 		return notes;
 	}
 
-	public void addNote(byte b) {
-		notes.add(b);
+	public boolean addNote(byte b) {
+		return notes.add(b);
 	}
 
 	public boolean hasNote(byte b) {
