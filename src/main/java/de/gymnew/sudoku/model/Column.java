@@ -5,7 +5,9 @@ public class Column extends Cluster {
 	public Column(int column, Sudoku sudoku){
 		super();
 		for(int i = 0; i<9; i++){
-			fields.add(sudoku.getField(column, i));
+			Field f = sudoku.getField(column, i);
+			fields.add(f);
+			f.setColumn(this);
 		}
 	}
 }

@@ -7,7 +7,9 @@ public class Block extends Cluster {
 
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
-				fields.add(sudoku.getField(x + i, y + j));
+				Field f = sudoku.getField(x + i, y + j);
+				fields.add(f);
+				f.setBlock(this);
 			}
 		}
 	}
