@@ -12,7 +12,7 @@ public abstract class Cluster {
 	}
 
 	public Set<Field> getFields() {
-		return fields;
+		return new HashSet<Field>(fields);
 	}
 
 	public boolean hasValue(byte value) {
