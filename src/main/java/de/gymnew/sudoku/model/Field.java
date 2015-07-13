@@ -46,4 +46,15 @@ public class Field {
 		return block;
 	}
 
+	void setRow(Row row) {
+		this.row = row;
+	}
+
+	void setBlock(Block block) {
+		this.block = block;
+	}
+
+	void setColumn(Column column) {
+		this.col = column;
+	}
 }
