@@ -2,7 +2,6 @@ package de.gymnew.sudoku.model;
 
 import java.util.Set;
 
-//Singed
 public class Field {
 
 	private byte value; // 0 = undefined
