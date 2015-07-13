@@ -16,5 +16,26 @@ public class Field {
 	public void setValue(byte value) {
 		this.value = value;
 	}
-	
+	public Set<Byte> getNotes() {
+		return notes;
+	}
+	public void addNote(byte b) {
+		notes.add(b);
+	}
+	public boolean hasNote(byte b){
+		return notes.contains(b);
+	}
+	public boolean deleteNote(byte b){
+		return notes.remove(b);
+	}
+	public Row getRow() {
+		return row;
+	}
+	public Column getCol() {
+		return col;
+	}
+	public Block getBlock() {
+		return block;
+	}
+
 }
