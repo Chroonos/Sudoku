@@ -5,9 +5,6 @@ import java.io.File;
 public class Sudoku {
 
 	private Field[][] fields;
-	private Row[] rows;
-	private Column[] cols;
-	private Block[][] blocks;
 
 	public Sudoku() {
 		fields = new Field[9][9];
@@ -17,7 +14,6 @@ public class Sudoku {
 				fields[i][j] = new Field();
 			}
 		}
-		// TODO Create Rows, Columns and Blocks
 	}
 
 	public Field getField(int column, int row) {
