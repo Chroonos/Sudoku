@@ -31,4 +31,18 @@ public abstract class Cluster {
 		}
 		return count;
 	}
+	
+	public Set<Field> getFieldsWithNote(byte note) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public void removeNotes(byte note) {
+		// TODO Auto-generated method stub
+	}
+	
+	public boolean containsField(Field field) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

@@ -27,7 +27,14 @@ public class Sudoku {
 	@Override
 	public Sudoku clone() {
 		Sudoku sudoku = new Sudoku();
-		sudoku.load(toString());
+		for(int i = 0; i<9; i++) {
+			for(int j = 0; j<9; j++) {
+				Field src = fields[i][j];
+				Field dst = sudoku.getField(i, j);
+				dst.setValue(src.getValue());
+				dst.addNotes(src.getNotes());
+			}
+		}
 		return null;
 	}
 	

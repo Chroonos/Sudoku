@@ -1,5 +1,6 @@
 package de.gymnew.sudoku.model;
 
+import java.util.Collection;
 import java.util.Set;
 
 public class Field {
@@ -24,6 +25,10 @@ public class Field {
 
 	public boolean addNote(byte b) {
 		return notes.add(b);
+	}
+	
+	public boolean addNotes(Collection<Byte> col) {
+		return notes.addAll(col);
 	}
 
 	public boolean hasNote(byte b) {
