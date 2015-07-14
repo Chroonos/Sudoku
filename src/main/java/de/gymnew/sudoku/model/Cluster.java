@@ -23,7 +23,7 @@ public abstract class Cluster {
 		return false;
 	}
 
-	public byte countNotes(byte note) {
+	public byte countNotes(byte note) { // TODO Code-deduplication
 		byte count = 0;
 		for (Field f : fields) {
 			if (f.hasNote(note))
@@ -33,8 +33,12 @@ public abstract class Cluster {
 	}
 	
 	public Set<Field> getFieldsWithNote(byte note) {
-		// TODO Auto-generated method stub
-		return null;
+		Set<Field> out = new HashSet<Field>();
+		for(Field f : fields) {
+			if(f.hasNote(note))
+				out.add(f);
+		}
+		return out;
 	}
 	
 	public void removeNotes(byte note) {
