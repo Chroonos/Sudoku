@@ -1,5 +1,6 @@
 package de.gymnew.sudoku.gui;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -15,6 +16,7 @@ public class MainFrame extends JFrame {
 	
 	private MainFrameHandler handler;
 	private SudokuPanel panel;
+	private int scaling;
 	
 	public MainFrame() {
 		
@@ -31,11 +33,12 @@ public class MainFrame extends JFrame {
 		
 		panel = new SudokuPanel();
 		panel.addMouseListener(handler);
+		panel.setOpaque(true);
 		setContentPane(panel);
 		
 		addWindowListener(new WindowAdapter(){
 			@Override
-			public void windowClosing(WindowEvent arg0) {
+			public void windowClosing(WindowEvent event) {
 				handler.onMenuQuit();
 			}
 		});
@@ -122,5 +125,15 @@ public class MainFrame extends JFrame {
 		// The DrawPane
 		/*==================================================*/
 		
+	}
+
+	public int getScaling() {
+		return scaling;
+	}
+
+	public void setScaling(int scaling) {
+		this.scaling = scaling;
+		// TODO update frame size
+		repaint();
 	}
 }
