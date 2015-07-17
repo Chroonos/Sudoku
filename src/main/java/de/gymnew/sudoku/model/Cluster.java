@@ -23,13 +23,9 @@ public abstract class Cluster {
 		return false;
 	}
 
-	public byte countNotes(byte note) { // TODO Code-deduplication
-		byte count = 0;
-		for (Field f : fields) {
-			if (f.hasNote(note))
-				count++;
-		}
-		return count;
+	public byte countNotes(byte note) {
+		byte out = (byte) getFieldsWithNote(note).size();
+		return out;
 	}
 
 	public Set<Field> getFieldsWithNote(byte note) {
