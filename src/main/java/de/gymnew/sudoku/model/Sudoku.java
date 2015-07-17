@@ -40,12 +40,23 @@ public class Sudoku {
 	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		String s = "";
+		for(int i=0;i<9;i++){
+			for(int j=0;j<9;j++){
+				s += fields[i][j].getValue();
+			}
+			s += "|";
+		}
+		return s;
 	}
 
 	private void load(String string) {
 		// TODO Auto-generated method stub
+		for(int i = 0;i<9;i++){
+			for(int j=0;j<9;j++){
+				string.charAt();
+			}
+		}
 	}
 	
 	public static Sudoku load(File file) {
