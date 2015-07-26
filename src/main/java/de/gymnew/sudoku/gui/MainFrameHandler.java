@@ -2,6 +2,9 @@ package de.gymnew.sudoku.gui;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+
+import javax.swing.JFileChooser;
 
 public class MainFrameHandler implements MouseListener{
 	
@@ -50,13 +53,17 @@ public class MainFrameHandler implements MouseListener{
 	/*==================================================*/
 	
 	public void onMenuQuit() {
-		// TODO Auto-generated method stub
+		System.exit(0);
 		
 	}
 	
 	public void onMenuLoad() {
-		// TODO Auto-generated method stub
-		
+		JFileChooser chooser = new JFileChooser();
+		chooser.showOpenDialog(null);
+		File file = chooser.getSelectedFile();
+		if(file != null){
+			//TODO
+		}
 	}
 	
 	public void onMenuSave() {
