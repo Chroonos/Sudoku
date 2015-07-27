@@ -99,7 +99,7 @@ public class MainFrame extends JFrame {
 		menuSudoku.add(itemQuit);
 		
 		
-		/*JMenu menuSolve = new JMenu("L\u00F6sen");
+		JMenu menuSolve = new JMenu("L\u00F6sen");
 		menuBar.add(menuSolve);
 		
 		JMenuItem itemSolverStart = new JMenuItem("L\u00F6ser starten");
@@ -123,16 +123,7 @@ public class MainFrame extends JFrame {
 		menuSolve.addSeparator();
 		
 		JMenu menuAlgorithm = new JMenu("Algorithmus");
-		menuSolve.add(menuAlgorithm);*/
-		
-		JMenuItem itemSolve = new JMenuItem("L\u00F6sen");
-		itemSolve.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent event) {
-				handler.onMenuSolve();
-			}
-		});
-		menuBar.add(itemSolve);
+		menuSolve.add(menuAlgorithm);
 		
 	}
 

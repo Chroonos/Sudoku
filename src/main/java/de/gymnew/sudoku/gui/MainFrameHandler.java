@@ -170,14 +170,19 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher{
 				"Tobias Bodensteiner, Sven Gebauer, Tobias Gr\u00F6mer, Katharina Hauer, Valentin Kellner, Elena Menzl, Jonas Piehler, Alexander Puff, Maximilian Rauch, Catrin Schnupfhagn, Matthias Zetzl");
 
 	}
-
-	public void onMenuSolve() {
+	
+	public void onMenuStartSolver() {
 		if(frame.getSolver() != null && frame.getSolver().isAlive()){
 			JOptionPane.showMessageDialog(frame, "Solver l&auml;uft bereits");
 			return;
 		}
 		frame.setSolver(new Solver(new Standard(frame.getSudoku(), false), this));
 		frame.getSolver().start();
+	}
+
+	public void onMenuStopSolver() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	/* ================================================== */
