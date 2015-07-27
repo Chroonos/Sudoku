@@ -1,7 +1,6 @@
 package de.gymnew.sudoku.algorithm;
 
 import de.gymnew.sudoku.core.Solver;
-import de.gymnew.sudoku.core.SolverWatcher;
 import de.gymnew.sudoku.model.Algorithm;
 import de.gymnew.sudoku.model.Block;
 import de.gymnew.sudoku.model.Column;

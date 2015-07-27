@@ -13,6 +13,7 @@ public class Solver extends Thread {
 		this.algorithm = algorithm;
 		result = null;
 		this.watcher = watcher;
+		algorithm.setSolver(this);
 	}
 	
 	@Override
