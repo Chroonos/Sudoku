@@ -8,4 +8,6 @@ public interface SolverWatcher {
 	
 	public void onFinised(Solver solver);
 	
+	public void onInterrupted(Solver solver);
+	
 }

@@ -13,15 +13,27 @@ public class Solver extends Thread {
 		this.algorithm = algorithm;
 		result = null;
 		this.watcher = watcher;
+		algorithm.setSolver(this);
 	}
 	
 	@Override
 	public void run() {
-		result = algorithm.solve();
-		watcher.onFinised(this);
+		try {
+			result = algorithm.solve();
+		} catch(InterruptedException e) {
+			watcher.onInterrupted(this);
+		}
 	}
 
 	public Sudoku getResult() {
 		return result;
+	}
+	
+	public SolverWatcher getWatcher() {
+		return watcher;
+	}
+	
+	public Algorithm getAlgorithm() {
+		return algorithm;
 	}
 }

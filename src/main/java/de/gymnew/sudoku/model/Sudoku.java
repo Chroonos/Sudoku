@@ -58,9 +58,10 @@ public class Sudoku {
 				Field dst = sudoku.getField(i, j);
 				dst.setValue(src.getValue());
 				dst.addNotes(src.getNotes());
+				dst.setLocked(src.isLocked());
 			}
 		}
-		return null;
+		return sudoku;
 	}
 
 	@Override
@@ -75,11 +76,31 @@ public class Sudoku {
 		return s;
 	}
 
-	private void load(String string) throws IOException {
-		// TODO check sudoku 2 times 
-		
-		System.out.println(string);
+	public boolean isValid() {
+		for (Row r : rows) {
+			if (r.isValid() == false) {
+				return false;
+			}
+		}
 
+		for (Column c : columns) {
+			if (c.isValid() == false) {
+				return false;
+			}
+		}
+
+		for (Block[] b1 : blocks) {
+			for (Block b2 : b1) {
+				if (b2.isValid() == false) {
+					return false;
+				}
+			}
+		}
+
+		return true;
+	}
+
+	private void load(String string) throws IOException {
 		for (int i = 0; i < 9; i++) {
 			int r = i * 10;
 			for (int j = 0; j < 9; j++) {
@@ -89,14 +110,18 @@ public class Sudoku {
 					fields[i][j].setValue(value);
 					if(value != 0) fields[i][j].setLocked(true);
 				} catch (NumberFormatException e) {
-					throw new IOException("No Number");
+					throw new IOException("No number");
 				}
 			}
 
 			if (String.valueOf(string.charAt(r + 9)).equals("|") == false) {
-				throw new IOException("False Sign");
+				throw new IOException("False sign");
 			}
 		}
+
+		/*if (isValid() == false) {
+			throw new IOException(); // TODO Fix this
+		}*/
 	}
 
 	public static Sudoku load(File file) throws IOException {
@@ -109,7 +134,7 @@ public class Sudoku {
 		return s;
 	}
 
-	public void save(File file) throws IOException{
+	public void save(File file) throws IOException {
 		FileWriter fw = new FileWriter(file);
 		fw.write(toString());
 		fw.flush();

@@ -1,5 +1,6 @@
 package de.gymnew.sudoku.algorithm;
 
+import de.gymnew.sudoku.core.Solver;
 import de.gymnew.sudoku.model.Algorithm;
 import de.gymnew.sudoku.model.Block;
 import de.gymnew.sudoku.model.Column;
@@ -12,18 +13,30 @@ public class Standard implements Algorithm {
 	private Sudoku sudoku;
 	private boolean rebuildNotes;
 	private boolean madeChanges;
+	private Solver solver;
 	
 	public Standard(Sudoku sudoku, boolean rebuildNotes) {
 		this.sudoku = sudoku;
 		this.rebuildNotes = rebuildNotes;
 	}
+
+	public void setSolver(Solver solver) {
+		this.solver = solver;
+	}
+	
+	public Sudoku getSudoku() {
+		return sudoku;
+	}
 	
 	@Override
-	public Sudoku solve() {
+	public Sudoku solve() throws InterruptedException{
 		if(rebuildNotes) createNotes();
 		
 		do {
 			madeChanges = false;
+			if(isSolved()) return sudoku;
+			if(Thread.interrupted()) throw new InterruptedException();
+			solver.getWatcher().onUpdate(solver, sudoku);
 			
 			singleNoteToValue();
 			if(madeChanges) continue;
@@ -42,9 +55,30 @@ public class Standard implements Algorithm {
 	// Non-Deterministic algorithm parts
 	/*==================================================*/
 	
-	private void tryRandom() {
+	private void tryRandom() throws InterruptedException {
 		Sudoku clone = sudoku.clone();
-		
+		for (int k = 2; k < 10; k++) {
+			for (int i = 0; i < 9; i++) {
+				for (int j = 0; j < 9; j++) {
+					if (sudoku.getField(i, j).getNotes().size() == k) {
+						Byte[] notes = sudoku.getField(i, j).getNotes()
+								.toArray(new Byte[k]);
+						int l = 0;
+						while (l < k + 1) {
+							byte b = notes[l];
+							sudoku = clone;
+							sudoku.getField(i, j).setValue(b);
+							if (solve() == null) {
+								l++;
+							} else {
+								madeChanges = true;
+								return;
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 	
 	/*==================================================*/
@@ -125,5 +159,15 @@ public class Standard implements Algorithm {
 		field.getBlock().removeNotes(value);
 		
 		madeChanges = true;
+	}
+	
+	private boolean isSolved() {
+		for(int i = 0; i < 9; i++) {
+			for(int j = 0; j < 9; j++) {
+				if(sudoku.getField(i, j).getValue() == 0)
+					return false;
+			}
+		}
+		return true;
 	}
 }

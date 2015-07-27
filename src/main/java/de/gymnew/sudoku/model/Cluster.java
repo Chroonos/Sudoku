@@ -50,4 +50,18 @@ public abstract class Cluster {
 		}
 		return false;
 	}
+
+	public boolean isValid() {
+		for (Field f1 : fields) {
+			if (f1.getValue() == 0) {
+				continue;
+			}
+			for (Field f2 : fields) {
+				if (f1.getValue() == f2.getValue()) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 }

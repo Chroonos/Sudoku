@@ -69,17 +69,24 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher{
 			} catch (NumberFormatException e) {
 				b = -1;
 			}
-			if (b > -1 && b < 10)
+			if (b < 0 || b > 9) {
+				JOptionPane.showMessageDialog(frame, "Ung\u00fcltige Eingabe!", "Eingabe-Fehler", JOptionPane.ERROR_MESSAGE);
+			} else if(!field.canHaveValue(b)) {
+				JOptionPane.showMessageDialog(frame, "Diese Zahl kann hier nicht eingetragen werden!", "Eingabe-Fehler", JOptionPane.ERROR_MESSAGE);
+			} else {
 				field.setValue(b);
+			}
 		} else if (event.getButton() == MouseEvent.BUTTON3) {
 			Set<Byte> notes = field.getNotes();
 			String n = "";
 			for (byte f : notes) {
 				n = n + f;
 			}
+
 			String s = JOptionPane.showInputDialog(frame, "Notizen: (ohne Leerzeichen)", n);
 			if (s == null)
 				return;
+
 
 			Set<Byte> newNotes = new HashSet<Byte>();
 			for (char c : s.toCharArray()) {
@@ -95,30 +102,6 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher{
 			field.addNotes(newNotes);
 		}
 		frame.repaint();
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent event) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent event) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent event) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent event) {
-		// TODO Auto-generated method stub
-
 	}
 
 	/* ================================================== */
@@ -139,11 +122,13 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher{
 			try {
 				frame.setSudoku(Sudoku.load(file));
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				JOptionPane.showMessageDialog(frame, "Sudoku konnte nicht geladen werden!", "Fehler beim Laden!",
+						JOptionPane.ERROR_MESSAGE);
 				e.printStackTrace();
 			}
 		} else {
-			JOptionPane.showMessageDialog(frame, "Keine Datei ausgew\u00E4hlt");
+			JOptionPane.showMessageDialog(frame, "Keine Datei ausgew\u00E4hlt", "Fehler beim Laden!",
+					JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -156,33 +141,38 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher{
 			try {
 				frame.getSudoku().save(file);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				JOptionPane.showMessageDialog(frame, "Sudoku konnte nicht gespeichert werden!",
+						"Fehler beim Speichern!", JOptionPane.ERROR_MESSAGE);
 				e.printStackTrace();
 			}
 		} else {
-			JOptionPane.showMessageDialog(frame, "Kein Speicherort ausgew\u00E4hlt");
+			JOptionPane.showMessageDialog(frame, "Kein Speicherort ausgew\u00E4hlt", "Fehler beim Speichern!",
+					JOptionPane.ERROR_MESSAGE);
 		}
 
 	}
 
 	public void onMenuCredits() {
 		JOptionPane.showMessageDialog(frame,
-				"Tobias Bodensteiner, Sven Gebauer, Tobias Gr\u00F6mer, Katharina Hauer, Valentin Kellner, Elena Menzl, Jonas Piehler, Alexander Puff, Maximilian Rauch, Catrin Schnupfhagn, Matthias Zetzl");
-
+				"Tobias Bodensteiner, Sven Gebauer, Tobias Gr\u00F6mer, Katharina Hauer, Valentin Kellner, Elena Menzl, Jonas Piehler, Alexander Puff, Maximilian Rauch, Catrin Schnupfhagn, Matthias Zetzl",
+				"Credits", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	public void onMenuStartSolver() {
 		if(frame.getSolver() != null && frame.getSolver().isAlive()){
-			JOptionPane.showMessageDialog(frame, "Solver l&auml;uft bereits");
+			JOptionPane.showMessageDialog(frame, "Solver l\u00e4uft bereits");
 			return;
 		}
-		frame.setSolver(new Solver(new Standard(frame.getSudoku(), false), this));
+		frame.setSolver(new Solver(new Standard(frame.getSudoku(), true), this));
 		frame.getSolver().start();
 	}
 
 	public void onMenuStopSolver() {
-		// TODO Auto-generated method stub
-		
+		if(frame.getSolver() == null |! frame.getSolver().isAlive()) {
+			JOptionPane.showMessageDialog(frame, "Solver l\u00e4uft nicht");
+			return;
+		}
+		frame.getSolver().interrupt();
 	}
 
 	/* ================================================== */
@@ -197,8 +187,19 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher{
 
 	@Override
 	public void onFinised(Solver solver) {
-		frame.setSudoku(solver.getResult());
+		if(solver.getResult() == null) {
+			JOptionPane.showMessageDialog(frame, "Der Solver konnte kein Ergebnis finden!");
+		} else {
+			frame.setSudoku(solver.getResult());
+			frame.getContentPane().repaint();
+			JOptionPane.showMessageDialog(frame, "Der Solver hat ein Ergebnis gefunden!");
+		}
+	}
+
+	@Override
+	public void onInterrupted(Solver solver) {
+		frame.setSudoku(solver.getAlgorithm().getSudoku());
 		frame.getContentPane().repaint();
-		JOptionPane.showMessageDialog(frame, "Der Solver hat ein Ergebnis gefunden!");
+		JOptionPane.showMessageDialog(frame, "Der Solver wurde unterbrochen!");
 	}
 }
