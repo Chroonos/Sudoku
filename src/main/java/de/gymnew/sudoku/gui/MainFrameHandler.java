@@ -69,8 +69,13 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher{
 			} catch (NumberFormatException e) {
 				b = -1;
 			}
-			if (b > -1 && b < 10)
+			if (b < 0 || b > 9) {
+				JOptionPane.showMessageDialog(frame, "Ung\u00fcltige Eingabe!", "Eingabe-Fehler", JOptionPane.ERROR_MESSAGE);
+			} else if(!field.canHaveValue(b)) {
+				JOptionPane.showMessageDialog(frame, "Diese Zahl kann hier nicht eingetragen werden!", "Eingabe-Fehler", JOptionPane.ERROR_MESSAGE);
+			} else {
 				field.setValue(b);
+			}
 		} else if (event.getButton() == MouseEvent.BUTTON3) {
 			Set<Byte> notes = field.getNotes();
 			String n = "";
@@ -171,7 +176,7 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher{
 
 	public void onMenuCredits() {
 		JOptionPane.showMessageDialog(frame,
-				"Tobias Bodensteiner, Sven Gebauer, Tobias Gr\u00F6mer, Katharina Hauer, Valentin Kellner, Elena Menzl, Jonas Piehler, Alexander Puff, Maximilian Rauch, Catrin Schnupfhagn, Rudolf Wimmer, Matthias Zetzl",
+				"Tobias Bodensteiner, Sven Gebauer, Tobias Gr\u00F6mer, Katharina Hauer, Valentin Kellner, Elena Menzl, Jonas Piehler, Alexander Puff, Maximilian Rauch, Catrin Schnupfhagn, Matthias Zetzl",
 				"Credits", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
@@ -197,7 +202,6 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher{
 	public void onUpdate(Solver solver, Sudoku sudoku) {
 		frame.setSudoku(sudoku);
 		frame.getContentPane().repaint();
-		//JOptionPane.showMessageDialog(frame, "Pause!"); // TODO Debug
 	}
 
 	@Override
