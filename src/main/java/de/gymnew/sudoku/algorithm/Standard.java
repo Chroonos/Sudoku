@@ -43,9 +43,27 @@ public class Standard implements Algorithm {
 	// Non-Deterministic algorithm parts
 	/*==================================================*/
 	
-	private void tryRandom() {
+	private void tryRandom() throws InterruptedException {
 		Sudoku clone = sudoku.clone();
-		
+		for (int k = 2; k < 10; k++) {
+			for (int i = 0; i < 9; i++) {
+				for (int j = 0; j < 9; j++) {
+					if (sudoku.getField(i, j).getNotes().size() == k) {
+						Byte[] notes = sudoku.getField(i, j).getNotes()
+								.toArray(new Byte[k]);
+						int l = 0;
+						while (l < k + 1) {
+							byte b = notes[l];
+							sudoku = clone;
+							sudoku.getField(i, j).setValue(b);
+							if (solve() == null) {
+								l++;
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 	
 	/*==================================================*/
