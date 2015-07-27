@@ -102,30 +102,6 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher{
 		frame.repaint();
 	}
 
-	@Override
-	public void mouseEntered(MouseEvent event) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent event) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent event) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent event) {
-		// TODO Auto-generated method stub
-
-	}
-
 	/* ================================================== */
 	// From MainFrame
 	/* ================================================== */
