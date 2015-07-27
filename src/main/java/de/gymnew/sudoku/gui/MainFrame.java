@@ -30,7 +30,7 @@ public class MainFrame extends JFrame {
 		handler = new MainFrameHandler(this);
 		scale = 10;
 		
-		setSize(800, 600);
+		setSize(800, 600); // TODO dynamic size
 		setResizable(false);
 		
 		setTitle("SudokuSolver");

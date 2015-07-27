@@ -91,7 +91,6 @@ public class MainFrameHandler extends MouseAdapter {
 			field.clearNotes();
 			field.addNotes(newNotes);
 		}
-
 		frame.repaint();
 	}
 

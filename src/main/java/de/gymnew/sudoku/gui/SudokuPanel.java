@@ -3,6 +3,7 @@ package de.gymnew.sudoku.gui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.util.Set;
 
 import javax.swing.JPanel;
 
@@ -13,6 +14,8 @@ public class SudokuPanel extends JPanel {
 
 	public static final int FIELD_SIZE = 5;
 	public static final int NUMBER_SIZE = 4;
+	public static final int NOTE_SIZE = 1;
+	public static final int NOTE_GAP = 1;
 
 	public static final int BLOCK_SEPARATOR_WIDTH = 1;
 
@@ -21,7 +24,6 @@ public class SudokuPanel extends JPanel {
 	public static final int OFFSET_BOTTOM = 3;
 
 	private Sudoku sudoku;
-
 	private MainFrame frame;
 
 	public SudokuPanel(MainFrame frame) {
@@ -63,8 +65,32 @@ public class SudokuPanel extends JPanel {
 							if (sudoku.getField(field_x + 3 * block_x, field_y + 3 * block_y).isLocked())
 								g.setColor(Color.GRAY);
 							g.drawChars(new char[] { ("" + value).charAt(0) }, 0, 1, x + frame.getScale(),
-									y + field_size - frame.getScale());
+									y + field_size - frame.getScale()); // TODO drawstring() ?
 							g.setColor(Color.BLACK);
+						} else {
+							Set<Byte> notes = sudoku.getField(field_x + 3 * block_x, field_y + 3 * block_y).getNotes();
+							String s = "";
+							for(byte f : notes){
+								s = s+f+" ";
+							}
+							String s1 = "";
+							String s2 = "";
+							String s3 = "";
+							s1 = s.substring(0);
+							if(s1.length() > 6){
+								s1 = s1.substring(0,5);
+								s2 = s.substring(6);
+								if(s2.length() > 6){
+									s2 = s2.substring(0,5);
+									s3 = s.substring(12);									
+								}
+							}
+							g.setFont(new Font("Arial", Font.PLAIN, NOTE_SIZE * frame.getScale()));
+							g.drawString(s1, x + frame.getScale(), y + field_size - 3*frame.getScale());
+							g.drawString(s2, x + frame.getScale(), y + field_size - 2*frame.getScale());
+							g.drawString(s3, x + frame.getScale(), y + field_size - frame.getScale());
+							g.setFont(new Font("Arial", Font.PLAIN, NUMBER_SIZE * frame.getScale()));
+							
 						}
 					}
 				}
