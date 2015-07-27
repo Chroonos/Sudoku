@@ -12,16 +12,17 @@ import de.gymnew.sudoku.model.Sudoku;
 @SuppressWarnings("serial")
 public class SudokuPanel extends JPanel {
 
-	public static final int FIELD_SIZE = 5;
-	public static final int NUMBER_SIZE = 4;
-	public static final int NOTE_SIZE = 1;
-	public static final int NOTE_GAP = 1;
+	public static final int FIELD_SIZE = 10;
+	public static final int NUMBER_SIZE = 8;
+	public static final int NUMBER_OFFSET = 2;
+	public static final int NOTE_SIZE = 2;
+	public static final int NOTE_OFFSET = 2;
 
-	public static final int BLOCK_SEPARATOR_WIDTH = 1;
+	public static final int BLOCK_SEPARATOR_WIDTH = 2;
 
-	public static final int OFFSET_SIDE = 3;
-	public static final int OFFSET_TOP = 3;
-	public static final int OFFSET_BOTTOM = 3;
+	public static final int OFFSET_SIDE = 6;
+	public static final int OFFSET_TOP = 6;
+	public static final int OFFSET_BOTTOM = 6;
 
 	private Sudoku sudoku;
 	private MainFrame frame;
@@ -64,8 +65,8 @@ public class SudokuPanel extends JPanel {
 						if (value != 0) {
 							if (sudoku.getField(field_x + 3 * block_x, field_y + 3 * block_y).isLocked())
 								g.setColor(Color.GRAY);
-							g.drawChars(new char[] { ("" + value).charAt(0) }, 0, 1, x + frame.getScale(),
-									y + field_size - frame.getScale()); // TODO drawstring() ?
+							g.drawChars(new char[] { ("" + value).charAt(0) }, 0, 1, x + NUMBER_OFFSET * frame.getScale(),
+									y + field_size - NUMBER_OFFSET * frame.getScale()); // TODO drawstring() ?
 							g.setColor(Color.BLACK);
 						} else {
 							Set<Byte> notes = sudoku.getField(field_x + 3 * block_x, field_y + 3 * block_y).getNotes();
@@ -86,9 +87,9 @@ public class SudokuPanel extends JPanel {
 								}
 							}
 							g.setFont(new Font("Arial", Font.PLAIN, NOTE_SIZE * frame.getScale()));
-							g.drawString(s1, x + frame.getScale(), y + field_size - 3*frame.getScale());
-							g.drawString(s2, x + frame.getScale(), y + field_size - 2*frame.getScale());
-							g.drawString(s3, x + frame.getScale(), y + field_size - frame.getScale());
+							g.drawString(s1, x + NOTE_OFFSET * frame.getScale(), y + field_size - NOTE_OFFSET * 3 * frame.getScale());
+							g.drawString(s2, x + NOTE_OFFSET * frame.getScale(), y + field_size - NOTE_OFFSET * 2 * frame.getScale());
+							g.drawString(s3, x + NOTE_OFFSET * frame.getScale(), y + field_size - NOTE_OFFSET * frame.getScale());
 							g.setFont(new Font("Arial", Font.PLAIN, NUMBER_SIZE * frame.getScale()));
 							
 						}
@@ -96,6 +97,7 @@ public class SudokuPanel extends JPanel {
 				}
 			}
 		}
+		
 	}
 
 	public Sudoku getSudoku() {
