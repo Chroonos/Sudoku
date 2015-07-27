@@ -3,6 +3,8 @@ package de.gymnew.sudoku.gui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.util.Set;
 
 import javax.swing.JPanel;
@@ -29,12 +31,17 @@ public class SudokuPanel extends JPanel {
 
 	public SudokuPanel(MainFrame frame) {
 		this.frame = frame;
+		int width = (OFFSET_SIDE*2 + BLOCK_SEPARATOR_WIDTH*4 + FIELD_SIZE*9) * frame.getScale();
+		int length = (OFFSET_TOP*2 + OFFSET_BOTTOM*2 + BLOCK_SEPARATOR_WIDTH*4 + FIELD_SIZE*9) * frame.getScale();
+		frame.setSize(width, length);
 	}
 
 	@Override
 	protected void paintComponent(Graphics g) {
 		if (sudoku == null)
 			return;
+
+		((Graphics2D) g).setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
 		int field_size = FIELD_SIZE * frame.getScale();
 		g.setFont(new Font("Arial", Font.PLAIN, NUMBER_SIZE * frame.getScale()));
@@ -60,44 +67,59 @@ public class SudokuPanel extends JPanel {
 						int x = base_x + (field_size * field_x);
 						int y = base_y + (field_size * field_y);
 						g.drawRect(x, y, field_size, field_size);
-
+						// Numbers
 						int value = sudoku.getField(field_x + 3 * block_x, field_y + 3 * block_y).getValue();
 						if (value != 0) {
 							if (sudoku.getField(field_x + 3 * block_x, field_y + 3 * block_y).isLocked())
 								g.setColor(Color.GRAY);
-							g.drawChars(new char[] { ("" + value).charAt(0) }, 0, 1, x + NUMBER_OFFSET * frame.getScale(),
-									y + field_size - NUMBER_OFFSET * frame.getScale()); // TODO drawstring() ?
+							String s = "" + value;
+							g.drawString(s, x + NUMBER_OFFSET * frame.getScale(),
+									y + field_size - NUMBER_OFFSET * frame.getScale());
 							g.setColor(Color.BLACK);
-						} else {
+						} else { // Notes
 							Set<Byte> notes = sudoku.getField(field_x + 3 * block_x, field_y + 3 * block_y).getNotes();
-							String s = "";
-							for(byte f : notes){
-								s = s+f+" ";
-							}
+// TODO remove if following method is better
+//							String s = "";
+//							for (byte f : notes) {
+//								s = s + f + " ";
+//							}
+//							String s1 = "";
+//							String s2 = "";
+//							String s3 = "";
+//							s1 = s.substring(0);
+//							if (s1.length() > 6) {
+//								s1 = s1.substring(0, 5);
+//								s2 = s.substring(6);
+//								if (s2.length() > 6) {
+//									s2 = s2.substring(0, 5);
+//									s3 = s.substring(12);
+//								}
+//							}
 							String s1 = "";
 							String s2 = "";
 							String s3 = "";
-							s1 = s.substring(0);
-							if(s1.length() > 6){
-								s1 = s1.substring(0,5);
-								s2 = s.substring(6);
-								if(s2.length() > 6){
-									s2 = s2.substring(0,5);
-									s3 = s.substring(12);									
+							for (byte f : notes){
+								for(int i=1; i<10; i++){
+									if(i < 4 && i == f) s1 = s1 + i + " ";
+									if(i > 3 && i < 7 && i == f) s2 = s2 + i + " ";
+									if(i > 6 && i < 10 && i == f) s3 = s3 + i + " ";
 								}
-							}
+							} // TODO one unique position for every note?
 							g.setFont(new Font("Arial", Font.PLAIN, NOTE_SIZE * frame.getScale()));
-							g.drawString(s1, x + NOTE_OFFSET * frame.getScale(), y + field_size - NOTE_OFFSET * 3 * frame.getScale());
-							g.drawString(s2, x + NOTE_OFFSET * frame.getScale(), y + field_size - NOTE_OFFSET * 2 * frame.getScale());
-							g.drawString(s3, x + NOTE_OFFSET * frame.getScale(), y + field_size - NOTE_OFFSET * frame.getScale());
+							g.drawString(s1, x + NOTE_OFFSET * frame.getScale(),
+									y + field_size - NOTE_OFFSET * 3 * frame.getScale());
+							g.drawString(s2, x + NOTE_OFFSET * frame.getScale(),
+									y + field_size - NOTE_OFFSET * 2 * frame.getScale());
+							g.drawString(s3, x + NOTE_OFFSET * frame.getScale(),
+									y + field_size - NOTE_OFFSET * frame.getScale());
 							g.setFont(new Font("Arial", Font.PLAIN, NUMBER_SIZE * frame.getScale()));
-							
+
 						}
 					}
 				}
 			}
 		}
-		
+
 	}
 
 	public Sudoku getSudoku() {

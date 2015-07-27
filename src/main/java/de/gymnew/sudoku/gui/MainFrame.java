@@ -31,6 +31,7 @@ public class MainFrame extends JFrame {
 		handler = new MainFrameHandler(this);
 		
 		setSize(800, 600);
+
 		setResizable(false);
 		
 		setScale(5);
