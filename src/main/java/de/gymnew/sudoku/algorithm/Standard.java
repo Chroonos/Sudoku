@@ -64,9 +64,9 @@ public class Standard implements Algorithm {
 						Byte[] notes = sudoku.getField(i, j).getNotes()
 								.toArray(new Byte[k]);
 						int l = 0;
-						while (l < k + 1) {
+						while (l < k) {
 							byte b = notes[l];
-							sudoku = clone;
+							sudoku = clone.clone();
 							sudoku.getField(i, j).setValue(b);
 							if (solve() == null) {
 								l++;
