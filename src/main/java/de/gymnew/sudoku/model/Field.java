@@ -14,6 +14,13 @@ public class Field {
 	public byte getValue() {
 		return value;
 	}
+	
+	public boolean canHaveValue(byte b) {
+		if(row.hasValue(b) == false && col.hasValue(b) == false && block.hasValue(b) == false) {
+			return true;
+		}
+		else return false;
+	}
 
 	public void setValue(byte value) {
 		this.value = value;
@@ -37,6 +44,10 @@ public class Field {
 
 	public boolean deleteNote(byte b) {
 		return notes.remove(b);
+	}
+	
+	public void clearNotes() {
+		notes.clear();
 	}
 
 	public Row getRow() {

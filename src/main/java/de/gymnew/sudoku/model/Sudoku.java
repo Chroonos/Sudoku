@@ -12,7 +12,6 @@ public class Sudoku {
 	private Row[] rows;
 	private Column[] columns;
 	private Block[][] blocks;
-
 	public Sudoku() {
 		fields = new Field[9][9];
 
@@ -77,7 +76,7 @@ public class Sudoku {
 	}
 
 	private void load(String string) throws IOException {
-		// TODO check sudoku
+		// TODO check sudoku 2 times 
 		
 		System.out.println(string);
 
