@@ -69,7 +69,7 @@ public class MainFrameHandler implements MouseListener {
 			frame.setSudoku(Sudoku.load(file));
 		}
 		else{
-			JOptionPane.showMessageDialog(frame, "Keine Datei ausgewählt");
+			JOptionPane.showMessageDialog(frame, "Keine Datei ausgew\u00E4hlt");
 		}
 	}
 
@@ -82,7 +82,7 @@ public class MainFrameHandler implements MouseListener {
 			frame.getSudoku().save(file);
 		}
 		else{
-			JOptionPane.showMessageDialog(frame, "Kein Speicherort ausgewählt");
+			JOptionPane.showMessageDialog(frame, "Kein Speicherort ausgew\u00E4hlt");
 		}
 
 	}
@@ -93,7 +93,7 @@ public class MainFrameHandler implements MouseListener {
 	}
 
 	public void onMenuCredits() {
-		JOptionPane.showMessageDialog(frame, "Tobias Bodensteiner, Sven Gebauer, Tobias Grömer, Katharina Hauer, Valentin Kellner, Elena Menzl, Jonas Piehler, Alexander Puff, Maximilian Rauch, Catrin Schnupfhagn, Rudolf Wimmer, Matthias Zetzl");
+		JOptionPane.showMessageDialog(frame, "Tobias Bodensteiner, Sven Gebauer, Tobias Gr\u00F6mer, Katharina Hauer, Valentin Kellner, Elena Menzl, Jonas Piehler, Alexander Puff, Maximilian Rauch, Catrin Schnupfhagn, Rudolf Wimmer, Matthias Zetzl");
 
 	}
 
