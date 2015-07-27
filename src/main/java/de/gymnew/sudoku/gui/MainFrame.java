@@ -79,7 +79,7 @@ public class MainFrame extends JFrame {
 		});
 		menuSudoku.add(itemSave);
 		
-		JMenuItem itemCheck = new JMenuItem("Prüfen");
+		JMenuItem itemCheck = new JMenuItem("Pr\u00fcfen");
 		itemCheck.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent event) {
