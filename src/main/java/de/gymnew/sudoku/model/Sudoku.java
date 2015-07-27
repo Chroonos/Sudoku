@@ -58,6 +58,7 @@ public class Sudoku {
 				Field dst = sudoku.getField(i, j);
 				dst.setValue(src.getValue());
 				dst.addNotes(src.getNotes());
+				dst.setLocked(src.isLocked());
 			}
 		}
 		return sudoku;
