@@ -54,7 +54,7 @@ public class Field {
 		return row;
 	}
 
-	public Column getCol() {
+	public Column getColumn() {
 		return col;
 	}
 
