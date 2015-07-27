@@ -27,4 +27,8 @@ public class Solver extends Thread {
 	public Sudoku getResult() {
 		return result;
 	}
+	
+	public SolverWatcher getWatcher() {
+		return watcher;
+	}
 }

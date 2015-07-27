@@ -1,5 +1,7 @@
 package de.gymnew.sudoku.algorithm;
 
+import de.gymnew.sudoku.core.Solver;
+import de.gymnew.sudoku.core.SolverWatcher;
 import de.gymnew.sudoku.model.Algorithm;
 import de.gymnew.sudoku.model.Block;
 import de.gymnew.sudoku.model.Column;
@@ -12,10 +14,15 @@ public class Standard implements Algorithm {
 	private Sudoku sudoku;
 	private boolean rebuildNotes;
 	private boolean madeChanges;
+	private Solver solver;
 	
 	public Standard(Sudoku sudoku, boolean rebuildNotes) {
 		this.sudoku = sudoku;
 		this.rebuildNotes = rebuildNotes;
+	}
+
+	public void setSolver(Solver solver) {
+		this.solver = solver;
 	}
 	
 	@Override
@@ -25,6 +32,7 @@ public class Standard implements Algorithm {
 		do {
 			madeChanges = false;
 			if(Thread.interrupted()) throw new InterruptedException();
+			solver.getWatcher().onUpdate(solver, sudoku);
 			
 			singleNoteToValue();
 			if(madeChanges) continue;
