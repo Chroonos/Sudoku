@@ -180,7 +180,7 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher{
 			JOptionPane.showMessageDialog(frame, "Solver l&auml;uft bereits");
 			return;
 		}
-		frame.setSolver(new Solver(new Standard(frame.getSudoku(), false), this));
+		frame.setSolver(new Solver(new Standard(frame.getSudoku(), true), this));
 		frame.getSolver().start();
 	}
 
