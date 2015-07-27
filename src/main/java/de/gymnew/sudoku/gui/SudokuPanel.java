@@ -78,22 +78,33 @@ public class SudokuPanel extends JPanel {
 							g.setColor(Color.BLACK);
 						} else { // Notes
 							Set<Byte> notes = sudoku.getField(field_x + 3 * block_x, field_y + 3 * block_y).getNotes();
-							String s = "";
-							for (byte f : notes) {
-								s = s + f + " ";
-							}
+// TODO remove if following method is better
+//							String s = "";
+//							for (byte f : notes) {
+//								s = s + f + " ";
+//							}
+//							String s1 = "";
+//							String s2 = "";
+//							String s3 = "";
+//							s1 = s.substring(0);
+//							if (s1.length() > 6) {
+//								s1 = s1.substring(0, 5);
+//								s2 = s.substring(6);
+//								if (s2.length() > 6) {
+//									s2 = s2.substring(0, 5);
+//									s3 = s.substring(12);
+//								}
+//							}
 							String s1 = "";
 							String s2 = "";
 							String s3 = "";
-							s1 = s.substring(0);
-							if (s1.length() > 6) {
-								s1 = s1.substring(0, 5);
-								s2 = s.substring(6);
-								if (s2.length() > 6) {
-									s2 = s2.substring(0, 5);
-									s3 = s.substring(12);
+							for (byte f : notes){
+								for(int i=1; i<10; i++){
+									if(i < 4 && i == f) s1 = s1 + i + " ";
+									if(i > 3 && i < 7 && i == f) s2 = s2 + i + " ";
+									if(i > 6 && i < 10 && i == f) s3 = s3 + i + " ";
 								}
-							}
+							} // TODO one unique position for every note?
 							g.setFont(new Font("Arial", Font.PLAIN, NOTE_SIZE * frame.getScale()));
 							g.drawString(s1, x + NOTE_OFFSET * frame.getScale(),
 									y + field_size - NOTE_OFFSET * 3 * frame.getScale());

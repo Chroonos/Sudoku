@@ -77,7 +77,7 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher{
 			for (byte f : notes) {
 				n = n + f;
 			}
-			String s = JOptionPane.showInputDialog(frame, "Notizen:", n);
+			String s = JOptionPane.showInputDialog(frame, "Notizen: (ohne Leerzeichen)", n);
 			if (s == null)
 				return;
 
