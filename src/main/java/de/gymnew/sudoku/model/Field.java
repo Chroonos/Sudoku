@@ -45,6 +45,10 @@ public class Field {
 	public boolean deleteNote(byte b) {
 		return notes.remove(b);
 	}
+	
+	public void clearNotes() {
+		notes.clear();
+	}
 
 	public Row getRow() {
 		return row;
