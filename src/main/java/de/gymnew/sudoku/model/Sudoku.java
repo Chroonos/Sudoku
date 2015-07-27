@@ -76,10 +76,26 @@ public class Sudoku {
 		return s;
 	}
 
+	public boolean isValid() {
+		for (Row r : rows) {
+			if (r.isValid() == false) {
+				return false;
+			}
+		}
+		for (Column c : columns) {
+			if (c.isValid() == false) {
+				return false;
+			}
+		}
+		for (Block b : blocks) {
+			if (b.isValid() == false) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	private void load(String string) throws IOException {
-		// TODO check sudoku
-		
-		System.out.println(string);
 
 		for (int i = 0; i < 9; i++) {
 			int r = i * 10;
@@ -89,13 +105,17 @@ public class Sudoku {
 					byte value = Byte.parseByte(string.substring(r + j, r + j + 1));
 					fields[i][j].setValue(value);
 				} catch (NumberFormatException e) {
-					throw new IOException("No Number");
+					throw new IOException("No number");
 				}
 			}
 
 			if (String.valueOf(string.charAt(r + 9)).equals("|") == false) {
-				throw new IOException("False Sign");
+				throw new IOException("False sign");
 			}
+		}
+
+		if (isValid() == false) {
+			throw new IOException(); // TODO change exception type
 		}
 	}
 
@@ -109,7 +129,7 @@ public class Sudoku {
 		return s;
 	}
 
-	public void save(File file) throws IOException{
+	public void save(File file) throws IOException {
 		FileWriter fw = new FileWriter(file);
 		fw.write(toString());
 		fw.flush();
