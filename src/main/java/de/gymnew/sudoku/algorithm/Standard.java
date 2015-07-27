@@ -30,6 +30,7 @@ public class Standard implements Algorithm {
 		
 		do {
 			madeChanges = false;
+			if(isSolved()) return sudoku;
 			if(Thread.interrupted()) throw new InterruptedException();
 			solver.getWatcher().onUpdate(solver, sudoku);
 			
@@ -154,5 +155,15 @@ public class Standard implements Algorithm {
 		field.getBlock().removeNotes(value);
 		
 		madeChanges = true;
+	}
+	
+	private boolean isSolved() {
+		for(int i = 0; i < 9; i++) {
+			for(int j = 0; j < 9; j++) {
+				if(sudoku.getField(i, j).getValue() == 0)
+					return false;
+			}
+		}
+		return true;
 	}
 }
