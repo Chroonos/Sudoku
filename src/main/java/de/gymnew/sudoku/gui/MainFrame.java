@@ -146,6 +146,7 @@ public class MainFrame extends JFrame {
 	
 	public void setSudoku(Sudoku sudoku){
 		panel.setSudoku(sudoku);
+		panel.repaint();
 	}
 
 	public Solver getSolver() {

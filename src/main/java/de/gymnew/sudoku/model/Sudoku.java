@@ -78,13 +78,15 @@ public class Sudoku {
 
 	private void load(String string) throws IOException {
 		// TODO check sudoku
+		
+		System.out.println(string);
 
 		for (int i = 0; i < 9; i++) {
-			int r = i * 9;
+			int r = i * 10;
 			for (int j = 0; j < 9; j++) {
 
 				try {
-					byte value = Byte.parseByte(String.valueOf(string.charAt(j + r)));
+					byte value = Byte.parseByte(string.substring(r + j, r + j + 1));
 					fields[i][j].setValue(value);
 				} catch (NumberFormatException e) {
 					throw new IOException("No Number");

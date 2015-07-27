@@ -3,6 +3,7 @@ package de.gymnew.sudoku.gui;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.io.IOException;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -66,7 +67,12 @@ public class MainFrameHandler implements MouseListener {
 		File file = chooser.getSelectedFile();
 
 		if (file != null) {
-			frame.setSudoku(Sudoku.load(file));
+			try {
+				frame.setSudoku(Sudoku.load(file));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		else{
 			JOptionPane.showMessageDialog(frame, "Keine Datei ausgew\u00E4hlt");
@@ -79,7 +85,12 @@ public class MainFrameHandler implements MouseListener {
 		File file = chooser.getSelectedFile();
 
 		if (file != null) {
-			frame.getSudoku().save(file);
+			try {
+				frame.getSudoku().save(file);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		else{
 			JOptionPane.showMessageDialog(frame, "Kein Speicherort ausgew\u00E4hlt");
