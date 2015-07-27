@@ -12,6 +12,7 @@ import javax.swing.JMenuItem;
 
 import de.gymnew.sudoku.core.Solver;
 import de.gymnew.sudoku.model.Sudoku;
+import static de.gymnew.sudoku.gui.SudokuPanel.*;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
@@ -28,10 +29,11 @@ public class MainFrame extends JFrame {
 		/*==================================================*/
 		
 		handler = new MainFrameHandler(this);
-		scale = 5;
 		
-		setSize(800, 600); // TODO dynamic size
+		setSize(800, 600);
 		setResizable(false);
+		
+		setScale(5);
 		
 		setTitle("SudokuSolver");
 		
@@ -131,9 +133,13 @@ public class MainFrame extends JFrame {
 		return scale;
 	}
 
-	public void setScale(int scaling) {
-		this.scale = scaling;
-		// TODO update frame size
+	public void setScale(int scale) {
+		this.scale = scale;
+		
+		int height = (OFFSET_TOP + OFFSET_BOTTOM + 9*FIELD_SIZE + 4*BLOCK_SEPARATOR_WIDTH) * scale + 50;
+		int width = (2*OFFSET_SIDE + 9*FIELD_SIZE + 4*BLOCK_SEPARATOR_WIDTH) * scale;
+		this.setSize(width, height);
+		
 		repaint();
 	}
 	
