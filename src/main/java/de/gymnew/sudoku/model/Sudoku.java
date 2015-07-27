@@ -60,7 +60,7 @@ public class Sudoku {
 				dst.addNotes(src.getNotes());
 			}
 		}
-		return null;
+		return sudoku;
 	}
 
 	@Override
