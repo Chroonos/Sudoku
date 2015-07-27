@@ -83,8 +83,7 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher{
 				n = n + f;
 			}
 			String s = JOptionPane.showInputDialog(frame, "Notizen:", n);
-			if (s == null)
-				return;
+			if (s == null) return;
 
 			Set<Byte> newNotes = new HashSet<Byte>();
 			for (char c : s.toCharArray()) {
