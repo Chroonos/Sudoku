@@ -1,6 +1,5 @@
 package de.gymnew.sudoku.gui;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -10,6 +9,8 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+
+import de.gymnew.sudoku.model.Sudoku;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
@@ -135,5 +136,13 @@ public class MainFrame extends JFrame {
 		this.scaling = scaling;
 		// TODO update frame size
 		repaint();
+	}
+	
+	public Sudoku getSudoku(){
+		return panel.getSudoku();
+	}
+	
+	public void setSudoku(Sudoku sudoku){
+		panel.setSudoku(sudoku);
 	}
 }
