@@ -76,7 +76,7 @@ public class Sudoku {
 		return s;
 	}
 
-	public boolean isValid() { // TODO This is bugged!
+	public boolean isValid() {
 		for (Row r : rows) {
 			if (r.isValid() == false) {
 				return false;
@@ -119,9 +119,9 @@ public class Sudoku {
 			}
 		}
 
-		/*if (isValid() == false) {
-			throw new IOException(); // TODO Fix this
-		}*/
+		if (isValid() == false) {
+			throw new IOException();
+		}
 	}
 
 	public static Sudoku load(File file) throws IOException {
