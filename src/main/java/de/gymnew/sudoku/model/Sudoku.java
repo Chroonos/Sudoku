@@ -2,8 +2,6 @@ package de.gymnew.sudoku.model;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -22,7 +20,29 @@ public class Sudoku {
 				fields[i][j] = new Field();
 			}
 		}
-		// TODO Create Rows, Columns and Blocks
+
+		columns = new Column[9];
+
+		for (int i = 0; i < 9; i++) {
+			columns[i] = new Column(i, this);
+		}
+
+		rows = new Row[9];
+
+		for (int i = 0; i < 9; i++) {
+			rows[i] = new Row(i, this);
+		}
+
+		blocks = new Block[3][3];
+
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				int r, s;
+				r = i * 3;
+				s = j * 3;
+				blocks[i][j] = new Block(r, s, this);
+			}
+		}
 	}
 
 	public Field getField(int column, int row) {
@@ -55,11 +75,23 @@ public class Sudoku {
 		return s;
 	}
 
-	private void load(String string) {
-		// TODO Auto-generated method stub
+	private void load(String string) throws IOException {
+		// TODO check sudoku
+
 		for (int i = 0; i < 9; i++) {
+			int r = i * 9;
 			for (int j = 0; j < 9; j++) {
-				string.charAt();
+
+				try {
+					byte value = Byte.parseByte(String.valueOf(string.charAt(j + r)));
+					fields[i][j].setValue(value);
+				} catch (NumberFormatException e) {
+					throw new IOException("No Number");
+				}
+			}
+
+			if (String.valueOf(string.charAt(r + 9)).equals("|") == false) {
+				throw new IOException("False Sign");
 			}
 		}
 	}
