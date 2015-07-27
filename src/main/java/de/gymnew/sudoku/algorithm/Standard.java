@@ -8,123 +8,112 @@ import de.gymnew.sudoku.model.Row;
 import de.gymnew.sudoku.model.Sudoku;
 
 public class Standard implements Algorithm {
-	
+
 	private Sudoku sudoku;
-	private boolean rebuildNotes;
-	private boolean madeChanges;
-	
-	public Standard(Sudoku sudoku, boolean rebuildNotes) {
+
+	public Standard(Sudoku sudoku) {
 		this.sudoku = sudoku;
-		this.rebuildNotes = rebuildNotes;
 	}
-	
+
 	@Override
-	public Sudoku solve() throws InterruptedException{
-		if(rebuildNotes) createNotes();
-		
-		do {
-			madeChanges = false;
-			if(Thread.interrupted()) throw new InterruptedException();
-			
-			singleNoteToValue();
-			if(madeChanges) continue;
-			
-			singleNoteInClusterToValue();
-			if(madeChanges) continue;
-			
-		} while(madeChanges);
-		
-		tryRandom();
-		if(madeChanges) return sudoku;
-		else return null;
+	public Sudoku solve() {
+		// TODO Auto-generated method stub
+		return null;
 	}
-	
-	/*==================================================*/
-	// Non-Deterministic algorithm parts
-	/*==================================================*/
-	
+
 	private void tryRandom() {
 		Sudoku clone = sudoku.clone();
-		
-	}
-	
-	/*==================================================*/
-	// Deterministic algorithm parts
-	/*==================================================*/
-	
-	private void createNotes() {
-		for (int i = 0; i < 9; i++) {
-			for (int j = 0; j < 9;j++) {
-				Field field = sudoku.getField(i, j);
-				field.clearNotes();
-				
-				for (byte k = 1; k < 10; k++) {
-					if (field.getValue() == 0 && field.canHaveValue(k)) {
-							field.addNote(k);
-					}
-				}
-			}
-		}
-	}
-	
-	private void singleNoteToValue() {
-		for (int i = 0; i < 9; i++){
-			for (int j = 0; j < 9; j++) {
-				Field field = sudoku.getField(i, j);
-				if (field.getNotes().size() == 1) {
-					byte b = field.getNotes().toArray(new Byte[1])[0];
-					setValue(field, b);
-				}
-			}
-		}
-	}
-	
-	private void singleNoteInClusterToValue(){
-		for(Column c : sudoku.getColumns()){
-			for(int i = 1; i < 10; i++){
-				if(c.countNotes((byte) i) == 1){
-					for(Field f : c.getFieldsWithNote((byte) i)){
-						setValue(f, (byte) i);
-					}
-				}
-			}
-		}
-		
-		for(Row r : sudoku.getRows()){
-			for(int i = 1; i < 10; i++){
-				if(r.countNotes((byte) i) == 1){
-					for(Field f : r.getFieldsWithNote((byte) i)){
-						setValue(f, (byte) i);
-					}
-				}
-			}
-		}
-		
-		for(Block[] blocks : sudoku.getBlocks()){
-			for(Block b : blocks){
-				for(int i = 1; i < 10; i++){
-					if(b.countNotes((byte) i) == 1){
-						for(Field f : b.getFieldsWithNote((byte) i)){
-							setValue(f, (byte) i);
+		for (int k = 2; k < 10; k++) {
+			for (int i = 0; i < 9; i++) {
+				for (int j = 0; j < 9; j++) {
+					if (sudoku.getField(i, j).getNotes().size() == k) {
+						Byte[] notes = sudoku.getField(i, j).getNotes()
+								.toArray(new Byte[k]);
+						int l = 0;
+						while (l < k + 1) {
+							byte b = notes[l];
+							sudoku = clone;
+							sudoku.getField(i, j).setValue(b);
+							if (solve() == null) {
+								l++;
+							}
 						}
 					}
 				}
 			}
 		}
 	}
-	
-	/*==================================================*/
-	// Auxiliary methods
-	/*==================================================*/
-	
-	private void setValue(Field field, byte value) {
-		field.clearNotes();
-		field.setValue(value);
-		
-		field.getRow().removeNotes(value);
-		field.getColumn().removeNotes(value);
-		field.getBlock().removeNotes(value);
-		
-		madeChanges = true;
+
+	private void createNotes() {
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 9; j++) {
+				for (byte k = 1; k < 10; k++) {
+					if (sudoku.getField(i, j).getValue() == 0) {
+						if (sudoku.getField(i, j).canHaveValue(k) == true
+								&& sudoku.getField(i, j).hasNote(k) == false) {
+							sudoku.getField(i, j).addNote(k);
+						}
+					} else {
+					}
+				}
+			}
+		}
+	}
+
+	private void singleNoteToValue() {
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 9; j++) {
+				if (sudoku.getField(i, j).getNotes().size() == 1) {
+					byte b = sudoku.getField(i, j).getNotes()
+							.toArray(new Byte[1])[0];
+					sudoku.getField(i, j).setValue(b);
+					sudoku.getField(i, j).clearNotes();
+				}
+			}
+		}
+	}
+
+	private void clearNoteCRB(byte b, int x, int y) {
+		Field f = sudoku.getField(x, y);
+		f.getRow().removeNotes(b);
+		f.getColumn().removeNotes(b);
+		f.getBlock().removeNotes(b);
+	}
+
+	private void singleNoteInClusterToValue(Sudoku sudoku) {
+		for (Column c : sudoku.getColumns()) {
+			for (int i = 1; i < 10; i++) {
+				if (c.countNotes((byte) i) == 1) {
+					for (Field f : c.getFieldsWithNote((byte) i)) {
+						f.setValue((byte) i);
+						f.clearNotes();
+					}
+				}
+			}
+		}
+
+		for (Row r : sudoku.getRows()) {
+			for (int i = 1; i < 10; i++) {
+				if (r.countNotes((byte) i) == 1) {
+					for (Field f : r.getFieldsWithNote((byte) i)) {
+						f.setValue((byte) i);
+						f.clearNotes();
+					}
+				}
+			}
+		}
+
+		for (Block[] blocks : sudoku.getBlocks()) {
+			for (Block b : blocks) {
+				for (int i = 1; i < 10; i++) {
+					if (b.countNotes((byte) i) == 1) {
+						for (Field f : b.getFieldsWithNote((byte) i)) {
+							f.setValue((byte) i);
+							f.clearNotes();
+						}
+					}
+				}
+			}
+		}
 	}
 }
