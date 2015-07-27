@@ -15,7 +15,11 @@ public class Solver extends Thread {
 	
 	@Override
 	public void run() {
-		result = algorithm.solve();
+		try {
+			result = algorithm.solve();
+		} catch(InterruptedException e) {
+			// TODO Notify SolverWatcher
+		}
 	}
 
 	public Sudoku getResult() {

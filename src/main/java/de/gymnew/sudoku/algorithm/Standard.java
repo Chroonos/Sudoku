@@ -19,11 +19,12 @@ public class Standard implements Algorithm {
 	}
 	
 	@Override
-	public Sudoku solve() {
+	public Sudoku solve() throws InterruptedException{
 		if(rebuildNotes) createNotes();
 		
 		do {
 			madeChanges = false;
+			if(Thread.interrupted()) throw new InterruptedException();
 			
 			singleNoteToValue();
 			if(madeChanges) continue;
