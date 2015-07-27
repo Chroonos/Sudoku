@@ -87,6 +87,7 @@ public class Sudoku {
 				try {
 					byte value = Byte.parseByte(string.substring(r + j, r + j + 1));
 					fields[i][j].setValue(value);
+					if(value != 0) fields[i][j].setLocked(true);
 				} catch (NumberFormatException e) {
 					throw new IOException("No Number");
 				}

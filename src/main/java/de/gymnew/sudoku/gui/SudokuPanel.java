@@ -21,7 +21,6 @@ public class SudokuPanel extends JPanel {
 	public static final int OFFSET_BOTTOM = 3;
 
 	private Sudoku sudoku;
-	private int selectX, selectY;
 	
 	private MainFrame frame;
 
@@ -59,8 +58,12 @@ public class SudokuPanel extends JPanel {
 						g.drawRect(x, y, field_size, field_size);
 
 						int value = sudoku.getField(field_x + 3 * block_x, field_y + 3 * block_y).getValue();
-						if (value != 0)
+						if (value != 0) {
+							if(sudoku.getField(field_x + 3 * block_x, field_y + 3 * block_y).isLocked())
+								g.setColor(Color.GRAY);
 							g.drawChars(new char[] { ("" + value).charAt(0) }, 0, 1, x + frame.getScale(), y + field_size - frame.getScale());
+							g.setColor(Color.BLACK);
+						}
 					}
 				}
 			}
@@ -73,11 +76,6 @@ public class SudokuPanel extends JPanel {
 
 	public void setSudoku(Sudoku sudoku) {
 		this.sudoku = sudoku;
-	}
-
-	public void setSelection(int x, int y) {
-		selectX = x;
-		selectY = y;
 	}
 
 }

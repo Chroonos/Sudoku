@@ -3,7 +3,6 @@ package de.gymnew.sudoku.gui;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
@@ -47,6 +46,14 @@ public class MainFrameHandler extends MouseAdapter {
 		
 		Field field = frame.getSudoku().getField(block_x*3+field_x, block_y*3+field_y);
 		
+		if(event.getButton() == MouseEvent.BUTTON2) {
+			field.setLocked((!field.isLocked()) && field.getValue() != 0);
+			frame.repaint();
+			return;
+		}
+		
+		if(field.isLocked()) return;
+		
 		if(event.getButton() == MouseEvent.BUTTON1) {
 			String s = JOptionPane.showInputDialog(frame, "Wert: (0 = leer)", field.getValue());
 			byte b;
@@ -56,18 +63,20 @@ public class MainFrameHandler extends MouseAdapter {
 				b = -1;
 			}
 			if(b > -1 && b < 10) field.setValue(b);
-		} else if(event.getButton() == MouseEvent.BUTTON2) {
+		} else if(event.getButton() == MouseEvent.BUTTON3) {
 			Set<Byte> notes = field.getNotes();
 			String n = "";
 			for(byte f : notes){
 				n = n + f;
 			}
 			String s = JOptionPane.showInputDialog(frame, "Notizen:", n);
+			if(s == null) return;
 			
 			Set<Byte> newNotes = new HashSet<Byte>();
 			for(char c : s.toCharArray()) {
 				try {
-					newNotes.add(Byte.parseByte(""+c));
+					byte b = Byte.parseByte(""+c);
+					if(b != 0) newNotes.add(b);
 				} catch(NumberFormatException e) {
 					return; //TODO error
 				}
@@ -155,7 +164,7 @@ public class MainFrameHandler extends MouseAdapter {
 	}
 
 	public void onMenuCredits() {
-		JOptionPane.showMessageDialog(frame, "Tobias Bodensteiner, Sven Gebauer, Tobias Gr\u00F6mer, Katharina Hauer, Valentin Kellner, Elena Menzl, Jonas Piehler, Alexander Puff, Maximilian Rauch, Catrin Schnupfhagn, Rudolf Wimmer, Matthias Zetzl");
+		JOptionPane.showMessageDialog(frame, "Tobias Bodensteiner, Sven Gebauer, Tobias Gr\u00F6mer, Katharina Hauer, Valentin Kellner, Elena Menzl, Jonas Piehler, Alexander Puff, Maximilian Rauch, Catrin Schnupfhagn, Matthias Zetzl");
 
 	}
 
