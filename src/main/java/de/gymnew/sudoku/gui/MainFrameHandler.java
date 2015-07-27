@@ -93,7 +93,7 @@ public class MainFrameHandler implements MouseListener {
 	}
 
 	public void onMenuCredits() {
-		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(frame, "Tobias Bodensteiner, Sven Gebauer, Tobias Grömer, Katharina Hauer, Valentin Kellner, Elena Menzl, Jonas Piehler, Alexander Puff, Maximilian Rauch, Catrin Schnupfhagn, Rudolf Wimmer, Matthias Zetzl");
 
 	}
 

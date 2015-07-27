@@ -10,6 +10,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
+import de.gymnew.sudoku.core.Solver;
 import de.gymnew.sudoku.model.Sudoku;
 
 @SuppressWarnings("serial")
@@ -18,6 +19,7 @@ public class MainFrame extends JFrame {
 	private MainFrameHandler handler;
 	private SudokuPanel panel;
 	private int scaling;
+	private Solver solver;
 	
 	public MainFrame() {
 		
@@ -144,5 +146,13 @@ public class MainFrame extends JFrame {
 	
 	public void setSudoku(Sudoku sudoku){
 		panel.setSudoku(sudoku);
+	}
+
+	public Solver getSolver() {
+		return solver;
+	}
+
+	public void setSolver(Solver solver) {
+		this.solver = solver;
 	}
 }
