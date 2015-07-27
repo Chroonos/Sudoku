@@ -3,6 +3,7 @@ package de.gymnew.sudoku.model;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class Sudoku {
@@ -106,4 +107,10 @@ public class Sudoku {
 		return s;
 	}
 
+	public void save(File file) throws IOException{
+		FileWriter fw = new FileWriter(file);
+		fw.write(toString());
+		fw.flush();
+		fw.close();
+	}
 }
