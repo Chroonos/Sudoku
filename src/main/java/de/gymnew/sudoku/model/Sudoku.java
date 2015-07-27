@@ -115,4 +115,16 @@ public class Sudoku {
 		fw.flush();
 		fw.close();
 	}
+	
+	public Block[][] getBlocks(){
+		return blocks;
+	}
+	
+	public Column[] getColumns(){
+		return columns;
+	}
+	
+	public Row[] getRows(){
+		return rows;
+	}
 }
