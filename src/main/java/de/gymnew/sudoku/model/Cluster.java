@@ -6,7 +6,7 @@ import java.util.Set;
 public abstract class Cluster {
 
 	protected Set<Field> fields;
-	
+
 	protected Cluster() {
 		fields = new HashSet<Field>();
 	}
@@ -24,25 +24,30 @@ public abstract class Cluster {
 	}
 
 	public byte countNotes(byte note) {
-		byte count = 0;
+		byte out = (byte) getFieldsWithNote(note).size();
+		return out;
+	}
+
+	public Set<Field> getFieldsWithNote(byte note) {
+		Set<Field> out = new HashSet<Field>();
 		for (Field f : fields) {
 			if (f.hasNote(note))
-				count++;
+				out.add(f);
 		}
-		return count;
+		return out;
 	}
-	
-	public Set<Field> getFieldsWithNote(byte note) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
+
 	public void removeNotes(byte note) {
-		// TODO Auto-generated method stub
+		for (Field f : fields) {
+			f.deleteNote(note);
+		}
 	}
-	
+
 	public boolean containsField(Field field) {
-		// TODO Auto-generated method stub
+		for (Field f : fields) {
+			if (f.equals(field))
+				return true;
+		}
 		return false;
 	}
 }
