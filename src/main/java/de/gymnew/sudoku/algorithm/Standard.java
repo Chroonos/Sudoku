@@ -42,6 +42,10 @@ public class Standard implements Algorithm {
 		}
 
 	}
+	private void clearNoteCRB (byte b, Sudoku sudoku, int x, int y) {
+		sudoku.getField(x, y).deleteNote(b);
+	}
+	
 	
 	private void singleNoteInClusterToValue(Sudoku sudoku){
 		for(Column c : sudoku.getColumns()){
