@@ -58,6 +58,9 @@ public class Standard implements Algorithm {
 							sudoku.getField(i, j).setValue(b);
 							if (solve() == null) {
 								l++;
+							} else {
+								madeChanges = true;
+								return;
 							}
 						}
 					}
