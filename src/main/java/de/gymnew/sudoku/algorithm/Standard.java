@@ -1,17 +1,27 @@
 package de.gymnew.sudoku.algorithm;
 
+import java.util.Stack;
+
 import de.gymnew.sudoku.model.Algorithm;
+import de.gymnew.sudoku.model.Field;
 import de.gymnew.sudoku.model.Sudoku;
 
 public class Standard implements Algorithm {
-
+	
+	private Stack<Sudoku> stack = new Stack<Sudoku>();
+	private Sudoku sudoku;
+	
+	public Standard(Sudoku sudoku) {
+		this.sudoku = sudoku;
+	}
+	
 	@Override
-	public Sudoku solve(Sudoku sudoku) {
+	public Sudoku solve() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	
-	private void createNotes(Sudoku sudoku) {
+	private void createNotes() {
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9;j++) {
 				for (byte k = 1; k < 10; k++) {
@@ -26,7 +36,7 @@ public class Standard implements Algorithm {
 		}
 	}
 	
-	private void singleNoteToValue(Sudoku sudoku) {
+	private void singleNoteToValue() {
 		for (int i = 0; i < 9; i++){
 			for (int j = 0; j < 9; j++) {
 				if (sudoku.getField(i, j).getNotes().size() == 1) {
@@ -36,11 +46,19 @@ public class Standard implements Algorithm {
 				}
 			}
 		}
-
-	}
-	private void clearNoteCRB (byte b, Sudoku sudoku, int x, int y) {
-		sudoku.getField(x, y).deleteNote(b);
 	}
 	
+	private void clearNoteCRB (byte b, int x, int y) {
+		Field f = sudoku.getField(x, y);
+		f.getRow().removeNotes(b);
+		f.getCol().removeNotes(b);
+		f.getBlock().removeNotes(b);
+	}
+	
+	private void tryOne() {
+		stack.push(sudoku.clone());
+		Sudoku s = sudoku.clone();
+		
+	}
 	
 }
