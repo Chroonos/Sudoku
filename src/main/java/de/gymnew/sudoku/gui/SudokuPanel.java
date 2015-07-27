@@ -3,6 +3,8 @@ package de.gymnew.sudoku.gui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.util.Set;
 
 import javax.swing.JPanel;
@@ -36,6 +38,8 @@ public class SudokuPanel extends JPanel {
 		if (sudoku == null)
 			return;
 
+		((Graphics2D) g).setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+
 		int field_size = FIELD_SIZE * frame.getScale();
 		g.setFont(new Font("Arial", Font.PLAIN, NUMBER_SIZE * frame.getScale()));
 
@@ -60,16 +64,16 @@ public class SudokuPanel extends JPanel {
 						int x = base_x + (field_size * field_x);
 						int y = base_y + (field_size * field_y);
 						g.drawRect(x, y, field_size, field_size);
-
+						// Numbers
 						int value = sudoku.getField(field_x + 3 * block_x, field_y + 3 * block_y).getValue();
 						if (value != 0) {
 							if (sudoku.getField(field_x + 3 * block_x, field_y + 3 * block_y).isLocked())
 								g.setColor(Color.GRAY);
-							String s = ""+value;
+							String s = "" + value;
 							g.drawString(s, x + NUMBER_OFFSET * frame.getScale(),
 									y + field_size - NUMBER_OFFSET * frame.getScale());
 							g.setColor(Color.BLACK);
-						} else {
+						} else { // Notes
 							Set<Byte> notes = sudoku.getField(field_x + 3 * block_x, field_y + 3 * block_y).getNotes();
 							String s = "";
 							for (byte f : notes) {
