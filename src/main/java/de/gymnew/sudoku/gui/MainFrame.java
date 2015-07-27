@@ -98,10 +98,10 @@ public class MainFrame extends JFrame {
 		menuSudoku.add(itemQuit);
 		
 		
-		JMenu menuSolve = new JMenu("Lösen");
+		JMenu menuSolve = new JMenu("L\u00F6sen");
 		menuBar.add(menuSolve);
 		
-		JMenuItem itemSolverStart = new JMenuItem("Löser starten");
+		JMenuItem itemSolverStart = new JMenuItem("L\u00F6ser starten");
 		itemSolverStart.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent event) {
@@ -110,7 +110,7 @@ public class MainFrame extends JFrame {
 		});
 		menuSolve.add(itemSolverStart);
 		
-		JMenuItem itemSolverStop = new JMenuItem("Löser stoppen");
+		JMenuItem itemSolverStop = new JMenuItem("L\u00F6ser stoppen");
 		itemSolverStop.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent event) {
