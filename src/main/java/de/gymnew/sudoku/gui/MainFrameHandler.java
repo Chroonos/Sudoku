@@ -70,12 +70,13 @@ public class MainFrameHandler implements MouseListener {
 			try {
 				frame.setSudoku(Sudoku.load(file));
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				JOptionPane.showMessageDialog(frame, "Sudoku konnte nicht geladen werden!", "Fehler beim Laden!",
+						JOptionPane.ERROR_MESSAGE);
 				e.printStackTrace();
 			}
-		}
-		else{
-			JOptionPane.showMessageDialog(frame, "Keine Datei ausgew\u00E4hlt");
+		} else {
+			JOptionPane.showMessageDialog(frame, "Keine Datei ausgew\u00E4hlt", "Fehler beim Laden!",
+					JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -88,12 +89,13 @@ public class MainFrameHandler implements MouseListener {
 			try {
 				frame.getSudoku().save(file);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				JOptionPane.showMessageDialog(frame, "Sudoku konnte nicht gespeichert werden!",
+						"Fehler beim Speichern!", JOptionPane.ERROR_MESSAGE);
 				e.printStackTrace();
 			}
-		}
-		else{
-			JOptionPane.showMessageDialog(frame, "Kein Speicherort ausgew\u00E4hlt");
+		} else {
+			JOptionPane.showMessageDialog(frame, "Kein Speicherort ausgew\u00E4hlt", "Fehler beim Speichern!",
+					JOptionPane.ERROR_MESSAGE);
 		}
 
 	}
@@ -104,7 +106,9 @@ public class MainFrameHandler implements MouseListener {
 	}
 
 	public void onMenuCredits() {
-		JOptionPane.showMessageDialog(frame, "Tobias Bodensteiner, Sven Gebauer, Tobias Gr\u00F6mer, Katharina Hauer, Valentin Kellner, Elena Menzl, Jonas Piehler, Alexander Puff, Maximilian Rauch, Catrin Schnupfhagn, Rudolf Wimmer, Matthias Zetzl");
+		JOptionPane.showMessageDialog(frame,
+				"Tobias Bodensteiner, Sven Gebauer, Tobias Gr\u00F6mer, Katharina Hauer, Valentin Kellner, Elena Menzl, Jonas Piehler, Alexander Puff, Maximilian Rauch, Catrin Schnupfhagn, Rudolf Wimmer, Matthias Zetzl",
+				"Credits", JOptionPane.INFORMATION_MESSAGE);
 
 	}
 
