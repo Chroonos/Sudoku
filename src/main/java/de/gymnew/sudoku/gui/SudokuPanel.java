@@ -31,6 +31,9 @@ public class SudokuPanel extends JPanel {
 
 	public SudokuPanel(MainFrame frame) {
 		this.frame = frame;
+		int width = (OFFSET_SIDE*2 + BLOCK_SEPARATOR_WIDTH*4 + FIELD_SIZE*9) * frame.getScale();
+		int length = (OFFSET_TOP*2 + OFFSET_BOTTOM*2 + BLOCK_SEPARATOR_WIDTH*4 + FIELD_SIZE*9) * frame.getScale();
+		frame.setSize(width, length);
 	}
 
 	@Override

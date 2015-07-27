@@ -30,7 +30,7 @@ public class MainFrame extends JFrame {
 		handler = new MainFrameHandler(this);
 		scale = 5;
 		
-		setSize(800, 600); // TODO dynamic size
+		setSize(800, 600); // TODO dynamic size -> Overridden in constructor of SudokuPanel
 		setResizable(false);
 		
 		setTitle("SudokuSolver");
