@@ -78,6 +78,15 @@ public class MainFrame extends JFrame {
 		});
 		menuSudoku.add(itemSave);
 		
+		JMenuItem itemCheck = new JMenuItem("Prüfen");
+		itemCheck.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				handler.onMenuCheck();
+			}
+		});
+		menuSudoku.add(itemCheck);
+		
 		menuSudoku.addSeparator();
 		
 		JMenuItem itemCredits = new JMenuItem("Credits");

@@ -76,7 +76,7 @@ public class Sudoku {
 		return s;
 	}
 
-	public boolean isValid() {
+	public boolean isValid() { // TODO This is bugged!
 		for (Row r : rows) {
 			if (r.isValid() == false) {
 				return false;
@@ -96,7 +96,7 @@ public class Sudoku {
 				}
 			}
 		}
-
+		
 		return true;
 	}
 

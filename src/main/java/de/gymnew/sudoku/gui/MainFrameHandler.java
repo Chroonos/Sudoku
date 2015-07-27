@@ -170,6 +170,14 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher{
 		}
 		frame.getSolver().interrupt();
 	}
+	
+	public void onMenuCheck() {
+		if(frame.getSudoku().isValid()) {
+			JOptionPane.showMessageDialog(frame, "Das Sudoku ist g\u00fcltig!");
+		} else {
+			JOptionPane.showMessageDialog(frame, "Das Sudoku ist ung\u00fcltig!");
+		}
+	}
 
 	/* ================================================== */
 	// SolverWatcher methods
