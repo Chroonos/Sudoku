@@ -3,7 +3,10 @@ package de.gymnew.sudoku.algorithm;
 import java.util.Stack;
 
 import de.gymnew.sudoku.model.Algorithm;
+import de.gymnew.sudoku.model.Block;
+import de.gymnew.sudoku.model.Column;
 import de.gymnew.sudoku.model.Field;
+import de.gymnew.sudoku.model.Row;
 import de.gymnew.sudoku.model.Sudoku;
 
 public class Standard implements Algorithm {
@@ -61,4 +64,40 @@ public class Standard implements Algorithm {
 		
 	}
 	
+	private void singleNoteInClusterToValue(Sudoku sudoku){
+		for(Column c : sudoku.getColumns()){
+			for(int i = 1; i < 10; i++){
+				if(c.countNotes((byte) i) == 1){
+					for(Field f : c.getFieldsWithNote((byte) i)){
+						f.setValue((byte) i); 
+						f.clearNotes();
+					}
+				}
+			}
+		}
+		
+		for(Row r : sudoku.getRows()){
+			for(int i = 1; i < 10; i++){
+				if(r.countNotes((byte) i) == 1){
+					for(Field f : r.getFieldsWithNote((byte) i)){
+						f.setValue((byte) i); 
+						f.clearNotes();
+					}
+				}
+			}
+		}
+		
+		for(Block[] blocks : sudoku.getBlocks()){
+			for(Block b : blocks){
+				for(int i = 1; i < 10; i++){
+					if(b.countNotes((byte) i) == 1){
+						for(Field f : b.getFieldsWithNote((byte) i)){
+							f.setValue((byte) i); 
+							f.clearNotes();
+						}
+					}
+				}
+			}
+		}
+	}
 }
