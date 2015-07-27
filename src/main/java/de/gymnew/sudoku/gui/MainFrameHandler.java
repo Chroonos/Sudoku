@@ -11,6 +11,8 @@ import java.util.Set;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
+import de.gymnew.sudoku.algorithm.Standard;
+import de.gymnew.sudoku.core.Solver;
 import de.gymnew.sudoku.model.Field;
 import de.gymnew.sudoku.model.Sudoku;
 import static de.gymnew.sudoku.gui.SudokuPanel.*;
@@ -162,19 +164,13 @@ public class MainFrameHandler extends MouseAdapter {
 
 	}
 
-	public void onMenuStartSolver() {
-		// TODO Auto-generated method stub
-
-	}
-
 	public void onMenuCredits() {
 		JOptionPane.showMessageDialog(frame,
 				"Tobias Bodensteiner, Sven Gebauer, Tobias Gr\u00F6mer, Katharina Hauer, Valentin Kellner, Elena Menzl, Jonas Piehler, Alexander Puff, Maximilian Rauch, Catrin Schnupfhagn, Matthias Zetzl");
 
 	}
 
-	public void onMenuStopSolver() {
-		// TODO Auto-generated method stub
-
+	public void onMenuSolve() {
+		
 	}
 }
