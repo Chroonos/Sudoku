@@ -2,6 +2,6 @@ package de.gymnew.sudoku.model;
 
 public interface Algorithm {
 	
-	public Sudoku solve();
+	public Sudoku solve() throws InterruptedException;
 	
 }
