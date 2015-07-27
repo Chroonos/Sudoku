@@ -22,10 +22,11 @@ public class SudokuPanel extends JPanel {
 
 	private Sudoku sudoku;
 	private int selectX, selectY;
-	private int scale;
+	
+	private MainFrame frame;
 
-	public SudokuPanel() {
-		scale = 10;
+	public SudokuPanel(MainFrame frame) {
+		this.frame = frame;
 	}
 
 	@Override
@@ -33,20 +34,20 @@ public class SudokuPanel extends JPanel {
 		if (sudoku == null)
 			return;
 
-		int field_size = FIELD_SIZE * scale;
-		g.setFont(new Font("Arial", Font.PLAIN, NUMBER_SIZE * scale));
+		int field_size = FIELD_SIZE * frame.getScale();
+		g.setFont(new Font("Arial", Font.PLAIN, NUMBER_SIZE * frame.getScale()));
 
 		for (int block_x = 0; block_x < 3; block_x++) {
 			for (int block_y = 0; block_y < 3; block_y++) {
 				int base_x = OFFSET_SIDE + BLOCK_SEPARATOR_WIDTH + ((FIELD_SIZE * 3) + BLOCK_SEPARATOR_WIDTH) * block_x;
-				base_x *= scale;
+				base_x *= frame.getScale();
 				int base_y = OFFSET_TOP + BLOCK_SEPARATOR_WIDTH + ((FIELD_SIZE * 3) + BLOCK_SEPARATOR_WIDTH) * block_y;
-				base_y *= scale;
+				base_y *= frame.getScale();
 
 				g.setColor(Color.BLACK);
-				g.fillRect(base_x - (BLOCK_SEPARATOR_WIDTH * scale), base_y - (BLOCK_SEPARATOR_WIDTH * scale),
-						(BLOCK_SEPARATOR_WIDTH * 2 + FIELD_SIZE * 3) * scale,
-						(BLOCK_SEPARATOR_WIDTH * 2 + FIELD_SIZE * 3) * scale);
+				g.fillRect(base_x - (BLOCK_SEPARATOR_WIDTH * frame.getScale()), base_y - (BLOCK_SEPARATOR_WIDTH * frame.getScale()),
+						(BLOCK_SEPARATOR_WIDTH * 2 + FIELD_SIZE * 3) * frame.getScale(),
+						(BLOCK_SEPARATOR_WIDTH * 2 + FIELD_SIZE * 3) * frame.getScale());
 				g.setColor(Color.WHITE);
 				g.fillRect(base_x, base_y, field_size * 3, field_size * 3);
 				g.setColor(Color.BLACK);
@@ -59,7 +60,7 @@ public class SudokuPanel extends JPanel {
 
 						int value = sudoku.getField(field_x + 3 * block_x, field_y + 3 * block_y).getValue();
 						if (value != 0)
-							g.drawChars(new char[] { ("" + value).charAt(0) }, 0, 1, x + scale, y + field_size - scale);
+							g.drawChars(new char[] { ("" + value).charAt(0) }, 0, 1, x + frame.getScale(), y + field_size - frame.getScale());
 					}
 				}
 			}

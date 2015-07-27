@@ -1,5 +1,7 @@
 package de.gymnew.sudoku.gui;
 
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
@@ -9,8 +11,9 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 import de.gymnew.sudoku.model.Sudoku;
+import static de.gymnew.sudoku.gui.SudokuPanel.*;
 
-public class MainFrameHandler implements MouseListener {
+public class MainFrameHandler extends MouseAdapter {
 
 	private MainFrame frame;
 
@@ -24,8 +27,10 @@ public class MainFrameHandler implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent event) {
-		// TODO Auto-generated method stub
-
+		Point click = event.getPoint();
+		int x = (int) click.getX();
+		int y = (int) click.getY();
+		
 	}
 
 	@Override
