@@ -1,7 +1,5 @@
 package de.gymnew.sudoku.algorithm;
 
-import java.util.Stack;
-
 import de.gymnew.sudoku.model.Algorithm;
 import de.gymnew.sudoku.model.Block;
 import de.gymnew.sudoku.model.Column;
@@ -11,7 +9,6 @@ import de.gymnew.sudoku.model.Sudoku;
 
 public class Standard implements Algorithm {
 	
-	private Stack<Sudoku> stack = new Stack<Sudoku>();
 	private Sudoku sudoku;
 	
 	public Standard(Sudoku sudoku) {
@@ -22,6 +19,11 @@ public class Standard implements Algorithm {
 	public Sudoku solve() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	private void tryRandom() {
+		Sudoku clone = sudoku.clone();
+		
 	}
 	
 	private void createNotes() {
@@ -56,12 +58,6 @@ public class Standard implements Algorithm {
 		f.getRow().removeNotes(b);
 		f.getCol().removeNotes(b);
 		f.getBlock().removeNotes(b);
-	}
-	
-	private void tryOne() {
-		stack.push(sudoku.clone());
-		Sudoku s = sudoku.clone();
-		
 	}
 	
 	private void singleNoteInClusterToValue(Sudoku sudoku){
