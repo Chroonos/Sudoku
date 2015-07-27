@@ -57,7 +57,7 @@ public abstract class Cluster {
 				continue;
 			}
 			for (Field f2 : fields) {
-				if (f1.getValue() == f2.getValue()) {
+				if (f1 != f2 && f1.getValue() == f2.getValue()) {
 					return false;
 				}
 			}
