@@ -7,15 +7,18 @@ public class Solver extends Thread {
 	
 	private Algorithm algorithm;
 	private Sudoku result;
+	private SolverWatcher watcher;
 	
-	public Solver(Algorithm algorithm) {
+	public Solver(Algorithm algorithm, SolverWatcher watcher) {
 		this.algorithm = algorithm;
 		result = null;
+		this.watcher = watcher;
 	}
 	
 	@Override
 	public void run() {
 		result = algorithm.solve();
+		watcher.onFinised(this);
 	}
 
 	public Sudoku getResult() {

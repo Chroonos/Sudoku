@@ -13,11 +13,12 @@ import javax.swing.JOptionPane;
 
 import de.gymnew.sudoku.algorithm.Standard;
 import de.gymnew.sudoku.core.Solver;
+import de.gymnew.sudoku.core.SolverWatcher;
 import de.gymnew.sudoku.model.Field;
 import de.gymnew.sudoku.model.Sudoku;
 import static de.gymnew.sudoku.gui.SudokuPanel.*;
 
-public class MainFrameHandler extends MouseAdapter {
+public class MainFrameHandler extends MouseAdapter implements SolverWatcher{
 
 	private MainFrame frame;
 
@@ -171,6 +172,28 @@ public class MainFrameHandler extends MouseAdapter {
 	}
 
 	public void onMenuSolve() {
-		
+		if(frame.getSolver() != null && frame.getSolver().isAlive()){
+			JOptionPane.showMessageDialog(frame, "Solver l&auml;uft bereits");
+			return;
+		}
+		frame.setSolver(new Solver(new Standard(frame.getSudoku(), false), this));
+		frame.getSolver().start();
+	}
+
+	/* ================================================== */
+	// SolverWatcher methods
+	/* ================================================== */
+	
+	@Override
+	public void onUpdate(Solver solver, Sudoku sudoku) {
+		frame.setSudoku(sudoku);
+		frame.getContentPane().repaint();
+	}
+
+	@Override
+	public void onFinised(Solver solver) {
+		frame.setSudoku(solver.getResult());
+		frame.getContentPane().repaint();
+		JOptionPane.showMessageDialog(frame, "Der Solver hat ein Ergebnis gefunden!");
 	}
 }
