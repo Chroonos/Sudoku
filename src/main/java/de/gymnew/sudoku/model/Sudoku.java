@@ -82,21 +82,25 @@ public class Sudoku {
 				return false;
 			}
 		}
+
 		for (Column c : columns) {
 			if (c.isValid() == false) {
 				return false;
 			}
 		}
-		for (Block b : blocks) {
-			if (b.isValid() == false) {
-				return false;
+
+		for (Block[] b1 : blocks) {
+			for (Block b2 : b1) {
+				if (b2.isValid() == false) {
+					return false;
+				}
 			}
 		}
+
 		return true;
 	}
 
 	private void load(String string) throws IOException {
-
 		for (int i = 0; i < 9; i++) {
 			int r = i * 10;
 			for (int j = 0; j < 9; j++) {
