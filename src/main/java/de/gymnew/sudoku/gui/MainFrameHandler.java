@@ -201,8 +201,12 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher{
 
 	@Override
 	public void onFinised(Solver solver) {
-		frame.setSudoku(solver.getResult());
-		frame.getContentPane().repaint();
-		JOptionPane.showMessageDialog(frame, "Der Solver hat ein Ergebnis gefunden!");
+		if(solver.getResult() == null) {
+			JOptionPane.showMessageDialog(frame, "Der Solver konnte kein Ergebnis finden!");
+		} else {
+			frame.setSudoku(solver.getResult());
+			frame.getContentPane().repaint();
+			JOptionPane.showMessageDialog(frame, "Der Solver hat ein Ergebnis gefunden!");
+		}
 	}
 }

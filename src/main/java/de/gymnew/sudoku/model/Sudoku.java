@@ -118,9 +118,9 @@ public class Sudoku {
 			}
 		}
 
-		if (isValid() == false) {
-			throw new IOException(); // TODO change exception type
-		}
+		/*if (isValid() == false) {
+			throw new IOException(); // TODO Fix this
+		}*/
 	}
 
 	public static Sudoku load(File file) throws IOException {
