@@ -21,7 +21,7 @@ public class Solver extends Thread {
 		try {
 			result = algorithm.solve();
 		} catch(InterruptedException e) {
-			// TODO Notify SolverWatcher
+			watcher.onInterrupted(this);
 		}
 	}
 
@@ -31,5 +31,9 @@ public class Solver extends Thread {
 	
 	public SolverWatcher getWatcher() {
 		return watcher;
+	}
+	
+	public Algorithm getAlgorithm() {
+		return algorithm;
 	}
 }

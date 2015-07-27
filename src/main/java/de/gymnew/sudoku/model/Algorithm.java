@@ -8,4 +8,6 @@ public interface Algorithm {
 	
 	public void setSolver(Solver solver);
 	
+	public Sudoku getSudoku();
+	
 }

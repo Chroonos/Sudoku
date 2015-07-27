@@ -24,6 +24,10 @@ public class Standard implements Algorithm {
 		this.solver = solver;
 	}
 	
+	public Sudoku getSudoku() {
+		return sudoku;
+	}
+	
 	@Override
 	public Sudoku solve() throws InterruptedException{
 		if(rebuildNotes) createNotes();

@@ -158,7 +158,7 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher{
 	
 	public void onMenuStartSolver() {
 		if(frame.getSolver() != null && frame.getSolver().isAlive()){
-			JOptionPane.showMessageDialog(frame, "Solver l&auml;uft bereits");
+			JOptionPane.showMessageDialog(frame, "Solver l\u00e4uft bereits");
 			return;
 		}
 		frame.setSolver(new Solver(new Standard(frame.getSudoku(), true), this));
@@ -166,8 +166,11 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher{
 	}
 
 	public void onMenuStopSolver() {
-		// TODO Auto-generated method stub
-		
+		if(frame.getSolver() == null |! frame.getSolver().isAlive()) {
+			JOptionPane.showMessageDialog(frame, "Solver l\u00e4uft nicht");
+			return;
+		}
+		frame.getSolver().interrupt();
 	}
 
 	/* ================================================== */
@@ -189,5 +192,12 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher{
 			frame.getContentPane().repaint();
 			JOptionPane.showMessageDialog(frame, "Der Solver hat ein Ergebnis gefunden!");
 		}
+	}
+
+	@Override
+	public void onInterrupted(Solver solver) {
+		frame.setSudoku(solver.getAlgorithm().getSudoku());
+		frame.getContentPane().repaint();
+		JOptionPane.showMessageDialog(frame, "Der Solver wurde unterbrochen!");
 	}
 }
