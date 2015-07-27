@@ -6,18 +6,19 @@ import de.gymnew.sudoku.model.Sudoku;
 public class Solver extends Thread {
 	
 	private Algorithm algorithm;
-	private Sudoku sudoku;
 	private Sudoku result;
+	private SolverWatcher watcher;
 	
-	public Solver(Algorithm algorithm, Sudoku sudoku) {
+	public Solver(Algorithm algorithm, SolverWatcher watcher) {
 		this.algorithm = algorithm;
-		this.sudoku = sudoku;
 		result = null;
+		this.watcher = watcher;
 	}
 	
 	@Override
 	public void run() {
-		result = algorithm.solve(sudoku);
+		result = algorithm.solve();
+		watcher.onFinised(this);
 	}
 
 	public Sudoku getResult() {

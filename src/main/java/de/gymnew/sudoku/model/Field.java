@@ -1,15 +1,21 @@
 package de.gymnew.sudoku.model;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 public class Field {
 
 	private byte value; // 0 = undefined
+	private boolean locked;
 	private Set<Byte> notes;
 	private Row row;
 	private Column col;
 	private Block block;
+	
+	Field() {
+		notes = new HashSet<Byte>();
+	}
 
 	public byte getValue() {
 		return value;
@@ -45,12 +51,16 @@ public class Field {
 	public boolean deleteNote(byte b) {
 		return notes.remove(b);
 	}
+	
+	public void clearNotes() {
+		notes.clear();
+	}
 
 	public Row getRow() {
 		return row;
 	}
 
-	public Column getCol() {
+	public Column getColumn() {
 		return col;
 	}
 
@@ -68,5 +78,13 @@ public class Field {
 
 	void setColumn(Column column) {
 		this.col = column;
+	}
+
+	public boolean isLocked() {
+		return locked;
+	}
+
+	public void setLocked(boolean locked) {
+		this.locked = locked;
 	}
 }

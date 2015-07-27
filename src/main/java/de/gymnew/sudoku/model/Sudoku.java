@@ -12,7 +12,6 @@ public class Sudoku {
 	private Row[] rows;
 	private Column[] columns;
 	private Block[][] blocks;
-
 	public Sudoku() {
 		fields = new Field[9][9];
 
@@ -108,6 +107,7 @@ public class Sudoku {
 				try {
 					byte value = Byte.parseByte(string.substring(r + j, r + j + 1));
 					fields[i][j].setValue(value);
+					if(value != 0) fields[i][j].setLocked(true);
 				} catch (NumberFormatException e) {
 					throw new IOException("No number");
 				}
@@ -138,5 +138,17 @@ public class Sudoku {
 		fw.write(toString());
 		fw.flush();
 		fw.close();
+	}
+	
+	public Block[][] getBlocks(){
+		return blocks;
+	}
+	
+	public Column[] getColumns(){
+		return columns;
+	}
+	
+	public Row[] getRows(){
+		return rows;
 	}
 }

@@ -18,7 +18,7 @@ public class MainFrame extends JFrame {
 	
 	private MainFrameHandler handler;
 	private SudokuPanel panel;
-	private int scaling;
+	private int scale;
 	private Solver solver;
 	
 	public MainFrame() {
@@ -28,13 +28,14 @@ public class MainFrame extends JFrame {
 		/*==================================================*/
 		
 		handler = new MainFrameHandler(this);
+		scale = 5;
 		
-		setSize(800, 600);
+		setSize(800, 600); // TODO dynamic size
 		setResizable(false);
 		
 		setTitle("SudokuSolver");
 		
-		panel = new SudokuPanel();
+		panel = new SudokuPanel(this);
 		panel.addMouseListener(handler);
 		panel.setOpaque(true);
 		setContentPane(panel);
@@ -124,18 +125,14 @@ public class MainFrame extends JFrame {
 		JMenu menuAlgorithm = new JMenu("Algorithmus");
 		menuSolve.add(menuAlgorithm);
 		
-		/*==================================================*/
-		// The DrawPane
-		/*==================================================*/
-		
 	}
 
-	public int getScaling() {
-		return scaling;
+	public int getScale() {
+		return scale;
 	}
 
-	public void setScaling(int scaling) {
-		this.scaling = scaling;
+	public void setScale(int scaling) {
+		this.scale = scaling;
 		// TODO update frame size
 		repaint();
 	}
