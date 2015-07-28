@@ -128,11 +128,6 @@ public class MainFrame extends JFrame {
 		});
 		menuSolve.add(itemSolverStop);
 		
-		menuSolve.addSeparator();
-		
-		JMenu menuAlgorithm = new JMenu("Algorithmus");
-		menuSolve.add(menuAlgorithm);
-		
 	}
 
 	public int getScale() {
