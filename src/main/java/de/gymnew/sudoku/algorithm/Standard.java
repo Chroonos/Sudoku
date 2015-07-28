@@ -42,6 +42,9 @@ public class Standard implements Algorithm {
 			if (Thread.interrupted()) {
 				throw new InterruptedException();
 			}
+			if(!isSolvable()) {
+				return null;
+			}
 			solver.getWatcher().onUpdate(solver, sudoku);
 
 			singleNoteToValue();
@@ -95,7 +98,7 @@ public class Standard implements Algorithm {
 	/* ================================================== */
 	// Deterministic algorithm parts
 	/* ================================================== */
-
+	
 	private void createNotes() {
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
@@ -170,6 +173,16 @@ public class Standard implements Algorithm {
 		field.getBlock().removeNotes(value);
 
 		madeChanges = true;
+	}
+	
+	private boolean isSolvable() {
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 9; j++) {
+				if (sudoku.getField(i, j).countNotes() == 0)
+					return false;
+			}
+		}
+		return true;
 	}
 
 	private boolean isSolved() {
