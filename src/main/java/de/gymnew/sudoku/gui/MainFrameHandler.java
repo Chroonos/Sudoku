@@ -90,11 +90,11 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher {
 		} else if (event.getButton() == MouseEvent.BUTTON3) {
 			Set<Byte> notes = field.getNotes();
 			String n = "";
-			synchronized (notes) {
-				for (byte f : notes) {
-					n = n + f;
-				}
+			
+			for (byte f : notes) {
+				n = n + f;
 			}
+			
 
 			String s = JOptionPane.showInputDialog(frame, "Notizen: (Nicht-Ziffern werden ignoriert)", n);
 			if (s == null) {

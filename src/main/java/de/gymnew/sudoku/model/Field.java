@@ -43,37 +43,37 @@ public class Field {
 		}
 	}
 
-	public synchronized int countNotes() {
+	public int countNotes() {
 		synchronized(notes) {
 			return notes.size();
 		}
 	}
 
-	public synchronized boolean addNote(byte b) {
+	public boolean addNote(byte b) {
 		synchronized(notes) {
 			return notes.add(b);
 		}
 	}
 
-	public synchronized boolean addNotes(Collection<Byte> col) {
+	public boolean addNotes(Collection<Byte> col) {
 		synchronized(notes) {
 			return notes.addAll(col);
 		}
 	}
 
-	public synchronized boolean hasNote(byte b) {
+	public boolean hasNote(byte b) {
 		synchronized(notes) {
 			return notes.contains(b);
 		}
 	}
 
-	public synchronized boolean deleteNote(byte b) {
+	public boolean deleteNote(byte b) {
 		synchronized(notes) {
 			return notes.remove(b);
 		}
 	}
 
-	public synchronized void clearNotes() {
+	public void clearNotes() {
 		synchronized(notes) {
 			notes.clear();
 		}

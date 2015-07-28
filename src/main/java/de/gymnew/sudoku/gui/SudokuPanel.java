@@ -102,18 +102,18 @@ public class SudokuPanel extends JPanel {
 							String s1 = "";
 							String s2 = "";
 							String s3 = "";
-							synchronized (notes) {
-								for (byte f : notes) {
-									for (int i = 1; i < 10; i++) {
-										if (i < 4 && i == f)
-											s1 = s1 + i + " ";
-										if (i > 3 && i < 7 && i == f)
-											s2 = s2 + i + " ";
-										if (i > 6 && i < 10 && i == f)
-											s3 = s3 + i + " ";
-									}
-								} // TODO one unique position for every note?
-							}
+
+							for (byte f : notes) {
+								for (int i = 1; i < 10; i++) {
+									if (i < 4 && i == f)
+										s1 = s1 + i + " ";
+									if (i > 3 && i < 7 && i == f)
+										s2 = s2 + i + " ";
+									if (i > 6 && i < 10 && i == f)
+										s3 = s3 + i + " ";
+								}
+							} // TODO one unique position for every note?
+
 							g.setFont(new Font("Arial", Font.PLAIN, NOTE_SIZE * frame.getScale()));
 							g.drawString(s1, x + NOTE_OFFSET * frame.getScale(),
 									y + field_size - NOTE_OFFSET * 3 * frame.getScale());
