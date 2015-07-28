@@ -32,6 +32,7 @@ public class Standard implements Algorithm {
 	public Sudoku solve() throws InterruptedException {
 		if (rebuildNotes) {
 			createNotes();
+			rebuildNotes = false;
 		}
 
 		do {
@@ -42,9 +43,9 @@ public class Standard implements Algorithm {
 			if (Thread.interrupted()) {
 				throw new InterruptedException();
 			}
-			if(!isSolvable()) {
+			/*if(!isSolvable()) { // TODO This is bugged
 				return null;
-			}
+			}*/
 			solver.getWatcher().onUpdate(solver, sudoku);
 
 			singleNoteToValue();
