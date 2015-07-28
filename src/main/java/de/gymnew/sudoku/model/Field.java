@@ -37,31 +37,45 @@ public class Field {
 	}
 
 	public Set<Byte> getNotes() {
-		return notes;
+		synchronized(notes) {
+			return new HashSet<Byte>(notes);
+		}
 	}
 
 	public synchronized int countNotes() {
-		return notes.size();
+		synchronized(notes) {
+			return notes.size();
+		}
 	}
 
 	public synchronized boolean addNote(byte b) {
-		return notes.add(b);
+		synchronized(notes) {
+			return notes.add(b);
+		}
 	}
 
 	public synchronized boolean addNotes(Collection<Byte> col) {
-		return notes.addAll(col);
+		synchronized(notes) {
+			return notes.addAll(col);
+		}
 	}
 
 	public synchronized boolean hasNote(byte b) {
-		return notes.contains(b);
+		synchronized(notes) {
+			return notes.contains(b);
+		}
 	}
 
 	public synchronized boolean deleteNote(byte b) {
-		return notes.remove(b);
+		synchronized(notes) {
+			return notes.remove(b);
+		}
 	}
 
 	public synchronized void clearNotes() {
-		notes.clear();
+		synchronized(notes) {
+			notes.clear();
+		}
 	}
 
 	public Row getRow() {
