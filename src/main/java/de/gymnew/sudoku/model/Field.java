@@ -12,7 +12,7 @@ public class Field {
 	private Row row;
 	private Column col;
 	private Block block;
-	
+
 	Field() {
 		notes = new HashSet<Byte>();
 	}
@@ -20,12 +20,16 @@ public class Field {
 	public byte getValue() {
 		return value;
 	}
-	
+
 	public boolean canHaveValue(byte b) {
-		if(row.hasValue(b) == false && col.hasValue(b) == false && block.hasValue(b) == false) {
+		if (b == 0) {
 			return true;
 		}
-		else return false;
+
+		if (row.hasValue(b) == false && col.hasValue(b) == false && block.hasValue(b) == false) {
+			return true;
+		} else
+			return false;
 	}
 
 	public void setValue(byte value) {
@@ -36,23 +40,27 @@ public class Field {
 		return notes;
 	}
 
-	public boolean addNote(byte b) {
+	public synchronized int countNotes() {
+		return notes.size();
+	}
+
+	public synchronized boolean addNote(byte b) {
 		return notes.add(b);
 	}
-	
-	public boolean addNotes(Collection<Byte> col) {
+
+	public synchronized boolean addNotes(Collection<Byte> col) {
 		return notes.addAll(col);
 	}
 
-	public boolean hasNote(byte b) {
+	public synchronized boolean hasNote(byte b) {
 		return notes.contains(b);
 	}
 
-	public boolean deleteNote(byte b) {
+	public synchronized boolean deleteNote(byte b) {
 		return notes.remove(b);
 	}
-	
-	public void clearNotes() {
+
+	public synchronized void clearNotes() {
 		notes.clear();
 	}
 
