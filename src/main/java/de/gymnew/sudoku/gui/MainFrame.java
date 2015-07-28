@@ -142,6 +142,18 @@ public class MainFrame extends JFrame {
 
 		checkboxDebug = new JCheckBoxMenuItem("Debug-Modus");
 		menuSolve.add(checkboxDebug);
+		
+		JMenu menuChange = new JMenu("Bearbeiten");
+		menuBar.add(menuChange);
+		
+		JMenuItem itemClear = new JMenuItem("Leeren");
+		itemClear.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				handler.onMenuClear();
+			}
+		});
+		menuChange.add(itemClear);
 	}
 
 	public int getScale() {

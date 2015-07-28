@@ -188,6 +188,10 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher {
 
 		frame.getSolver().interrupt();
 	}
+	
+	public void onMenuClear() {
+		frame.setSudoku(new Sudoku());
+	}
 
 	public void onMenuCheck() {
 		if (frame.getSudoku().isValid()) {
