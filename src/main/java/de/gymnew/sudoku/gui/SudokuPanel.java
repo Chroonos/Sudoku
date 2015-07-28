@@ -76,8 +76,7 @@ public class SudokuPanel extends JPanel {
 							if (sudoku.getField(field_x + 3 * block_x, field_y + 3 * block_y).isLocked())
 								g.setColor(Color.GRAY);
 							String s = "" + value;
-							g.drawString(s, x + number_offset,
-									y + field_size - number_offset);
+							g.drawString(s, x + number_offset, y + field_size - number_offset);
 							g.setColor(Color.BLACK);
 						} else { // Notes
 							int note_offset = NOTE_OFFSET * frame.getScale();
@@ -101,25 +100,61 @@ public class SudokuPanel extends JPanel {
 							// }
 							// }
 
-							String s1 = "";
-							String s2 = "";
-							String s3 = "";
-
+							// String s1 = "";
+							// String s2 = "";
+							// String s3 = "";
+							//
+							// for (byte f : notes) {
+							// for (int i = 1; i < 10; i++) {
+							// if (i < 4 && i == f)
+							// s1 = s1 + i + " ";
+							// if (i > 3 && i < 7 && i == f)
+							// s2 = s2 + i + " ";
+							// if (i > 6 && i < 10 && i == f)
+							// s3 = s3 + i + " ";
+							// }
+							// } // TODO one unique position for every note?
+							g.setFont(new Font("Arial", Font.PLAIN, NOTE_SIZE * frame.getScale()));
+							String s = "";
 							for (byte f : notes) {
 								for (int i = 1; i < 10; i++) {
-									if (i < 4 && i == f)
-										s1 = s1 + i + " ";
-									if (i > 3 && i < 7 && i == f)
-										s2 = s2 + i + " ";
-									if (i > 6 && i < 10 && i == f)
-										s3 = s3 + i + " ";
+									if (i < 4 && i == f) {
+										int ys = y + field_size - note_offset * 3;
+										if (i == 1)
+											g.drawString("1", x + note_offset, ys);
+										if (i == 2)
+											g.drawString("2", x + note_offset * 2, ys);
+										if (i == 3)
+											g.drawString("3", x + note_offset * 3, ys);
+									}
+									if (i > 3 && i < 7 && i == f){
+										int ys = y + field_size - note_offset * 2;
+										if (i == 4)
+											g.drawString("4", x + note_offset, ys);
+										if (i == 5)
+											g.drawString("5", x + note_offset * 2, ys);
+										if (i == 6)
+											g.drawString("6", x + note_offset * 3, ys);
+									}
+									if (i > 6 && i < 10 && i == f){
+										int ys = y + field_size - note_offset;
+										if (i == 7)
+											g.drawString("7", x + note_offset, ys);
+										if (i == 8)
+											g.drawString("8", x + note_offset * 2, ys);
+										if (i == 9)
+											g.drawString("9", x + note_offset * 3, ys);
+									}
 								}
-							} // TODO one unique position for every note?
+							}
 
-							g.setFont(new Font("Arial", Font.PLAIN, NOTE_SIZE * frame.getScale()));
-							g.drawString(s1, x + note_offset, y + field_size - note_offset * 3);
-							g.drawString(s2, x + note_offset, y + field_size - note_offset * 2);
-							g.drawString(s3, x + note_offset, y + field_size - note_offset);
+							
+							// g.drawString(s1, x + note_offset, y + field_size
+							// - note_offset * 3);
+							// g.drawString(s2, x + note_offset, y + field_size
+							// - note_offset * 2);
+							// g.drawString(s3, x + note_offset, y + field_size
+							// - note_offset);
 							g.setFont(new Font("Arial", Font.PLAIN, NUMBER_SIZE * frame.getScale()));
 
 						}
