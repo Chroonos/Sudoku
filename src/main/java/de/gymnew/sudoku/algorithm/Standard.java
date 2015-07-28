@@ -43,9 +43,9 @@ public class Standard implements Algorithm {
 			if (Thread.interrupted()) {
 				throw new InterruptedException();
 			}
-			/*if(!isSolvable()) { // TODO This is bugged
+			if(!isSolvable()) { // TODO This is bugged
 				return null;
-			}*/
+			}
 			solver.getWatcher().onUpdate(solver, sudoku);
 
 			singleNoteToValue();
@@ -179,7 +179,7 @@ public class Standard implements Algorithm {
 	private boolean isSolvable() {
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
-				if (sudoku.getField(i, j).countNotes() == 0)
+				if (sudoku.getField(i, j).countNotes() == 0 && sudoku.getField(i, j).getValue() == 0)
 					return false;
 			}
 		}
