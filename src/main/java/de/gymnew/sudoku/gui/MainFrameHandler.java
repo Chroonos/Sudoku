@@ -18,7 +18,7 @@ import de.gymnew.sudoku.model.Field;
 import de.gymnew.sudoku.model.Sudoku;
 import static de.gymnew.sudoku.gui.SudokuPanel.*;
 
-public class MainFrameHandler extends MouseAdapter implements SolverWatcher{
+public class MainFrameHandler extends MouseAdapter implements SolverWatcher {
 
 	private MainFrame frame;
 
@@ -63,6 +63,11 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher{
 
 		if (event.getButton() == MouseEvent.BUTTON1) {
 			String s = JOptionPane.showInputDialog(frame, "Wert: (0 = leer)", field.getValue());
+
+			if (s == null) {
+				return;
+			}
+
 			byte b;
 			try {
 				b = Byte.parseByte(s);
@@ -70,23 +75,26 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher{
 				b = -1;
 			}
 			if (b < 0 || b > 9) {
-				JOptionPane.showMessageDialog(frame, "Ung\u00fcltige Eingabe!", "Eingabe-Fehler", JOptionPane.ERROR_MESSAGE);
-			} else if(!field.canHaveValue(b)) {
-				JOptionPane.showMessageDialog(frame, "Diese Zahl kann hier nicht eingetragen werden!", "Eingabe-Fehler", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(frame, "Ung\u00fcltige Eingabe!", "Eingabe-Fehler",
+						JOptionPane.ERROR_MESSAGE);
+			} else if (!field.canHaveValue(b)) {
+				JOptionPane.showMessageDialog(frame, "Diese Zahl kann hier nicht eingetragen werden!", "Eingabe-Fehler",
+						JOptionPane.ERROR_MESSAGE);
 			} else {
 				field.setValue(b);
 			}
 		} else if (event.getButton() == MouseEvent.BUTTON3) {
 			Set<Byte> notes = field.getNotes();
 			String n = "";
-			for (byte f : notes) {
-				n = n + f;
+			synchronized (notes) {
+				for (byte f : notes) {
+					n = n + f;
+				}
 			}
 
 			String s = JOptionPane.showInputDialog(frame, "Notizen: (ohne Leerzeichen)", n);
 			if (s == null)
 				return;
-
 
 			Set<Byte> newNotes = new HashSet<Byte>();
 			for (char c : s.toCharArray()) {
@@ -156,9 +164,9 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher{
 				"Tobias Bodensteiner, Sven Gebauer, Tobias Gr\u00F6mer, Katharina Hauer, Valentin Kellner, Elena Menzl, Jonas Piehler, Alexander Puff, Maximilian Rauch, Catrin Schnupfhagn, Matthias Zetzl",
 				"Credits", JOptionPane.INFORMATION_MESSAGE);
 	}
-	
+
 	public void onMenuStartSolver() {
-		if(frame.getSolver() != null && frame.getSolver().isAlive()){
+		if (frame.getSolver() != null && frame.getSolver().isAlive()) {
 			JOptionPane.showMessageDialog(frame, "Solver l\u00e4uft bereits");
 			return;
 		}
@@ -167,15 +175,15 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher{
 	}
 
 	public void onMenuStopSolver() {
-		if(frame.getSolver() == null |! frame.getSolver().isAlive()) {
+		if (frame.getSolver() == null | !frame.getSolver().isAlive()) {
 			JOptionPane.showMessageDialog(frame, "Solver l\u00e4uft nicht");
 			return;
 		}
 		frame.getSolver().interrupt();
 	}
-	
+
 	public void onMenuCheck() {
-		if(frame.getSudoku().isValid()) {
+		if (frame.getSudoku().isValid()) {
 			JOptionPane.showMessageDialog(frame, "Das Sudoku ist g\u00fcltig!");
 		} else {
 			JOptionPane.showMessageDialog(frame, "Das Sudoku ist ung\u00fcltig!");
@@ -185,17 +193,17 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher{
 	/* ================================================== */
 	// SolverWatcher methods
 	/* ================================================== */
-	
+
 	@Override
 	public void onUpdate(Solver solver, Sudoku sudoku) {
 		frame.setSudoku(sudoku);
 		frame.getContentPane().repaint();
-		//JOptionPane.showMessageDialog(frame, "Pause!"); // TODO debug
+		// JOptionPane.showMessageDialog(frame, "Pause!"); // TODO debug
 	}
 
 	@Override
-	public void onFinised(Solver solver) {
-		if(solver.getResult() == null) {
+	public void onFinished(Solver solver) {
+		if (solver.getResult() == null) {
 			JOptionPane.showMessageDialog(frame, "Der Solver konnte kein Ergebnis finden!");
 		} else {
 			frame.setSudoku(solver.getResult());
