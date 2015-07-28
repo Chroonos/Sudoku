@@ -28,8 +28,9 @@ public class Field {
 
 		if (row.hasValue(b) == false && col.hasValue(b) == false && block.hasValue(b) == false) {
 			return true;
-		} else
-			return false;
+		}
+		
+		return false;
 	}
 
 	public void setValue(byte value) {

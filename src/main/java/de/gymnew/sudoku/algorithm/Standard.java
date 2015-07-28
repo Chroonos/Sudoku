@@ -30,32 +30,37 @@ public class Standard implements Algorithm {
 
 	@Override
 	public Sudoku solve() throws InterruptedException {
-		if (rebuildNotes)
+		if (rebuildNotes) {
 			createNotes();
+		}
 
 		do {
 			madeChanges = false;
-			if (isSolved())
+			if (isSolved()) {
 				return sudoku;
-			if (Thread.interrupted())
+			}
+			if (Thread.interrupted()) {
 				throw new InterruptedException();
+			}
 			solver.getWatcher().onUpdate(solver, sudoku);
 
 			singleNoteToValue();
-			if (madeChanges)
+			if (madeChanges) {
 				continue;
+			}
 
 			singleNoteInClusterToValue();
-			if (madeChanges)
+			if (madeChanges) {
 				continue;
+			}
 
 		} while (madeChanges);
 
 		tryRandom();
-		if (madeChanges)
+		if (madeChanges) {
 			return sudoku;
-		else
-			return null;
+		}
+		return null;
 	}
 
 	/* ================================================== */

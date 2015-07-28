@@ -39,8 +39,9 @@ public class SudokuPanel extends JPanel {
 
 	@Override
 	protected void paintComponent(Graphics g) {
-		if (sudoku == null)
-			return;
+		if (sudoku == null) {
+			sudoku = new Sudoku();
+		}
 
 		((Graphics2D) g).setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 

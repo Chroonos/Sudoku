@@ -17,8 +17,9 @@ public abstract class Cluster {
 
 	public boolean hasValue(byte value) {
 		for (Field f : fields) {
-			if (f.getValue() == value)
+			if (f.getValue() == value) {
 				return true;
+			}
 		}
 		return false;
 	}
@@ -31,8 +32,9 @@ public abstract class Cluster {
 	public Set<Field> getFieldsWithNote(byte note) {
 		Set<Field> out = new HashSet<Field>();
 		for (Field f : fields) {
-			if (f.hasNote(note))
+			if (f.hasNote(note)) {
 				out.add(f);
+			}
 		}
 		return out;
 	}
@@ -45,8 +47,9 @@ public abstract class Cluster {
 
 	public boolean containsField(Field field) {
 		for (Field f : fields) {
-			if (f.equals(field))
+			if (f.equals(field)) {
 				return true;
+			}
 		}
 		return false;
 	}

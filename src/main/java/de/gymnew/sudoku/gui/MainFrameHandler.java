@@ -37,18 +37,21 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher {
 		int y = (int) click.getY();
 		x -= (OFFSET_SIDE + BLOCK_SEPARATOR_WIDTH) * frame.getScale();
 		y -= (OFFSET_TOP + BLOCK_SEPARATOR_WIDTH) * frame.getScale();
-		if (x <= 0 || y <= 0)
+		if (x <= 0 || y <= 0) {
 			return;
+		}
 		int block_x = (int) x / ((FIELD_SIZE * 3 + BLOCK_SEPARATOR_WIDTH) * frame.getScale());
 		int block_y = (int) y / ((FIELD_SIZE * 3 + BLOCK_SEPARATOR_WIDTH) * frame.getScale());
-		if (block_x > 2 || block_y > 2)
+		if (block_x > 2 || block_y > 2) {
 			return;
+		}
 		x -= block_x * (FIELD_SIZE * 3 + BLOCK_SEPARATOR_WIDTH) * frame.getScale();
 		y -= block_y * (FIELD_SIZE * 3 + BLOCK_SEPARATOR_WIDTH) * frame.getScale();
 		int field_x = (int) x / (FIELD_SIZE * frame.getScale());
 		int field_y = (int) y / (FIELD_SIZE * frame.getScale());
-		if (field_x > 2 || field_y > 2)
+		if (field_x > 2 || field_y > 2) {
 			return;
+		}
 
 		Field field = frame.getSudoku().getField(block_x * 3 + field_x, block_y * 3 + field_y);
 
@@ -58,8 +61,9 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher {
 			return;
 		}
 
-		if (field.isLocked())
+		if (field.isLocked()) {
 			return;
+		}
 
 		if (event.getButton() == MouseEvent.BUTTON1) {
 			String s = JOptionPane.showInputDialog(frame, "Wert: (0 = leer)", field.getValue());
@@ -93,15 +97,17 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher {
 			}
 
 			String s = JOptionPane.showInputDialog(frame, "Notizen: (ohne Leerzeichen)", n);
-			if (s == null)
+			if (s == null) {
 				return;
+			}
 
 			Set<Byte> newNotes = new HashSet<Byte>();
 			for (char c : s.toCharArray()) {
 				try {
 					byte b = Byte.parseByte("" + c);
-					if (b != 0)
+					if (b != 0) {
 						newNotes.add(b);
+					}
 				} catch (NumberFormatException e) {
 					return; // TODO error
 				}
@@ -198,7 +204,7 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher {
 	public void onUpdate(Solver solver, Sudoku sudoku) {
 		frame.setSudoku(sudoku);
 		frame.getContentPane().repaint();
-		// JOptionPane.showMessageDialog(frame, "Pause!"); // TODO debug
+		// JOptionPane.showMessageDialog(frame, "Pause!"); // TODO Add debug option?
 	}
 
 	@Override
