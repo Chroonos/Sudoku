@@ -173,18 +173,20 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher {
 
 	public void onMenuStartSolver() {
 		if (frame.getSolver() != null && frame.getSolver().isAlive()) {
-			JOptionPane.showMessageDialog(frame, "Solver l\u00e4uft bereits");
+			JOptionPane.showMessageDialog(frame, "Solver l\u00e4uft bereits", "Fehler", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
+		
 		frame.setSolver(new Solver(new Standard(frame.getSudoku(), true), this));
 		frame.getSolver().start();
 	}
 
 	public void onMenuStopSolver() {
-		if (frame.getSolver() == null | !frame.getSolver().isAlive()) {
-			JOptionPane.showMessageDialog(frame, "Solver l\u00e4uft nicht");
+		if (frame.getSolver() == null || (!frame.getSolver().isAlive())) {
+			JOptionPane.showMessageDialog(frame, "Solver l\u00e4uft nicht", "Fehler", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
+		
 		frame.getSolver().interrupt();
 	}
 
