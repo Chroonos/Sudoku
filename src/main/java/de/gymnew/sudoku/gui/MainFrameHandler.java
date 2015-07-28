@@ -146,7 +146,7 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher {
 
 	public void onMenuSave() {
 		JFileChooser chooser = new JFileChooser();
-		chooser.showOpenDialog(null);
+		chooser.showSaveDialog(null);
 		File file = chooser.getSelectedFile();
 
 		if (file != null) {
