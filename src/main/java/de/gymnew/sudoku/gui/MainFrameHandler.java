@@ -166,7 +166,10 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher {
 
 	public void onMenuCredits() {
 		JOptionPane.showMessageDialog(frame,
-				"Tobias Bodensteiner, Sven Gebauer, Tobias Gr\u00F6mer, Katharina Hauer, Valentin Kellner, Elena Menzl, Jonas Piehler, Alexander Puff, Maximilian Rauch, Catrin Schnupfhagn, Matthias Zetzl",
+				"Projektleiter: Sven Gebauer, Tobias Gr\u00F6mer\n"
+				+ "Betreuende Lehrkraft: StD Horst Dippold\n"
+				+ "Developer:  Tobias Bodensteiner, Katharina Hauer, Valentin Kellner, Elena Menzl,\n"
+				+ "Jonas Piehler, Alexander Puff, Maximilian Rauch, Catrin Schnupfhagn, Matthias Zetzl",
 				"Credits", JOptionPane.INFORMATION_MESSAGE);
 	}
 
