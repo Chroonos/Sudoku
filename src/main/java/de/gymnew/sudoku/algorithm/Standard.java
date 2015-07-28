@@ -43,7 +43,7 @@ public class Standard implements Algorithm {
 			if (Thread.interrupted()) {
 				throw new InterruptedException();
 			}
-			if (!isSolvable()) { // TODO This is bugged
+			if (!isSolvable()) {
 				return null;
 			}
 			solver.getWatcher().onUpdate(solver, sudoku);
