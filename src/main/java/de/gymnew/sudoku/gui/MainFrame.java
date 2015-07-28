@@ -154,6 +154,15 @@ public class MainFrame extends JFrame {
 			}
 		});
 		menuChange.add(itemClear);
+		
+		JMenuItem itemReset = new JMenuItem("Zur\u00fccksetzen");
+		itemReset.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				handler.onMenuReset();
+			}
+		});
+		menuChange.add(itemReset);
 	}
 
 	public int getScale() {
