@@ -100,6 +100,15 @@ public class MainFrame extends JFrame {
 		
 		menuSudoku.addSeparator();
 		
+		JMenuItem itemScale = new JMenuItem("Skalierung");
+		itemScale.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				handler.onMenuScale();
+			}
+		});
+		menuSudoku.add(itemScale);
+		
 		JMenuItem itemQuit = new JMenuItem("Beenden");
 		itemQuit.addActionListener(new ActionListener(){
 			@Override

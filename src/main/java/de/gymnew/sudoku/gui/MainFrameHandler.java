@@ -96,7 +96,7 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher {
 				}
 			}
 
-			String s = JOptionPane.showInputDialog(frame, "Notizen: (ohne Leerzeichen)", n);
+			String s = JOptionPane.showInputDialog(frame, "Notizen: (Nicht-Ziffern werden ignoriert)", n);
 			if (s == null) {
 				return;
 			}
@@ -109,7 +109,7 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher {
 						newNotes.add(b);
 					}
 				} catch (NumberFormatException e) {
-					return; // TODO error
+					continue;
 				}
 			}
 			field.clearNotes();
@@ -193,6 +193,21 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher {
 			JOptionPane.showMessageDialog(frame, "Das Sudoku ist g\u00fcltig!");
 		} else {
 			JOptionPane.showMessageDialog(frame, "Das Sudoku ist ung\u00fcltig!");
+		}
+	}
+	
+	public void onMenuScale() {
+		String s = JOptionPane.showInputDialog(frame, "Neuer Skalierungs-Faktor: (Ganzzahl < 0)", frame.getScale());
+		try {
+			int i = Integer.parseInt(s);
+			if (i < 1) {
+				JOptionPane.showMessageDialog(frame, "Ung\u00fcltige Eingabe!", "Eingabe-Fehler",
+						JOptionPane.ERROR_MESSAGE);
+			}
+			frame.setScale(i);
+		} catch(NumberFormatException e) {
+			JOptionPane.showMessageDialog(frame, "Ung\u00fcltige Eingabe!", "Eingabe-Fehler",
+					JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
