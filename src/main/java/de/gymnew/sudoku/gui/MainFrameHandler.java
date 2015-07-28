@@ -68,7 +68,7 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher {
 		if (event.getButton() == MouseEvent.BUTTON1) {
 			String s = JOptionPane.showInputDialog(frame, "Wert: (0 = leer)", field.getValue());
 
-			if (s == null) {
+			if (s == null || "".equals(s)) {
 				return;
 			}
 
