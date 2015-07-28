@@ -90,11 +90,10 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher {
 		} else if (event.getButton() == MouseEvent.BUTTON3) {
 			Set<Byte> notes = field.getNotes();
 			String n = "";
-			
+
 			for (byte f : notes) {
 				n = n + f;
 			}
-			
 
 			String s = JOptionPane.showInputDialog(frame, "Notizen: (Nicht-Ziffern werden ignoriert)", n);
 			if (s == null) {
@@ -176,7 +175,7 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher {
 			JOptionPane.showMessageDialog(frame, "Solver l\u00e4uft bereits", "Fehler", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-		
+
 		frame.setSolver(new Solver(new Standard(frame.getSudoku(), true), this));
 		frame.getSolver().start();
 	}
@@ -186,7 +185,7 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher {
 			JOptionPane.showMessageDialog(frame, "Solver l\u00e4uft nicht", "Fehler", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-		
+
 		frame.getSolver().interrupt();
 	}
 
@@ -197,7 +196,7 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher {
 			JOptionPane.showMessageDialog(frame, "Das Sudoku ist ung\u00fcltig!");
 		}
 	}
-	
+
 	public void onMenuScale() {
 		String s = JOptionPane.showInputDialog(frame, "Neuer Skalierungs-Faktor: (Ganzzahl < 0)", frame.getScale());
 		try {
@@ -207,7 +206,7 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher {
 						JOptionPane.ERROR_MESSAGE);
 			}
 			frame.setScale(i);
-		} catch(NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(frame, "Ung\u00fcltige Eingabe!", "Eingabe-Fehler",
 					JOptionPane.ERROR_MESSAGE);
 		}

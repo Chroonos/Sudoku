@@ -29,7 +29,7 @@ public class Field {
 		if (row.hasValue(b) == false && col.hasValue(b) == false && block.hasValue(b) == false) {
 			return true;
 		}
-		
+
 		return false;
 	}
 
@@ -38,43 +38,43 @@ public class Field {
 	}
 
 	public Set<Byte> getNotes() {
-		synchronized(notes) {
+		synchronized (notes) {
 			return new HashSet<Byte>(notes);
 		}
 	}
 
 	public int countNotes() {
-		synchronized(notes) {
+		synchronized (notes) {
 			return notes.size();
 		}
 	}
 
 	public boolean addNote(byte b) {
-		synchronized(notes) {
+		synchronized (notes) {
 			return notes.add(b);
 		}
 	}
 
 	public boolean addNotes(Collection<Byte> col) {
-		synchronized(notes) {
+		synchronized (notes) {
 			return notes.addAll(col);
 		}
 	}
 
 	public boolean hasNote(byte b) {
-		synchronized(notes) {
+		synchronized (notes) {
 			return notes.contains(b);
 		}
 	}
 
 	public boolean deleteNote(byte b) {
-		synchronized(notes) {
+		synchronized (notes) {
 			return notes.remove(b);
 		}
 	}
 
 	public void clearNotes() {
-		synchronized(notes) {
+		synchronized (notes) {
 			notes.clear();
 		}
 	}

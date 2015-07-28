@@ -12,6 +12,7 @@ public class Sudoku {
 	private Row[] rows;
 	private Column[] columns;
 	private Block[][] blocks;
+
 	public Sudoku() {
 		fields = new Field[9][9];
 
@@ -96,7 +97,7 @@ public class Sudoku {
 				}
 			}
 		}
-		
+
 		return true;
 	}
 
@@ -142,16 +143,16 @@ public class Sudoku {
 		fw.flush();
 		fw.close();
 	}
-	
-	public Block[][] getBlocks(){
+
+	public Block[][] getBlocks() {
 		return blocks;
 	}
-	
-	public Column[] getColumns(){
+
+	public Column[] getColumns() {
 		return columns;
 	}
-	
-	public Row[] getRows(){
+
+	public Row[] getRows() {
 		return rows;
 	}
 }

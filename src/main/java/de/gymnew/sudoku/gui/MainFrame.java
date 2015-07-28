@@ -17,131 +17,129 @@ import static de.gymnew.sudoku.gui.SudokuPanel.*;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
-	
+
 	private MainFrameHandler handler;
 	private SudokuPanel panel;
 	private int scale;
 	private Solver solver;
-	
+
 	private JCheckBoxMenuItem checkboxDebug;
-	
+
 	public MainFrame() {
-		
-		/*==================================================*/
+
+		/* ================================================== */
 		// The Basics
-		/*==================================================*/
-		
+		/* ================================================== */
+
 		handler = new MainFrameHandler(this);
 
 		setResizable(false);
 		setScale(5);
 		setTitle("SudokuSolver");
-		
+
 		panel = new SudokuPanel(this);
 		panel.addMouseListener(handler);
 		panel.setOpaque(true);
 		setContentPane(panel);
-		
-		addWindowListener(new WindowAdapter(){
+
+		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent event) {
 				handler.onMenuQuit();
 			}
 		});
-		
-		/*==================================================*/
+
+		/* ================================================== */
 		// The Menu
-		/*==================================================*/
-		
+		/* ================================================== */
+
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
-		
-		
+
 		JMenu menuSudoku = new JMenu("Sudoku");
 		menuBar.add(menuSudoku);
-		
+
 		JMenuItem itemLoad = new JMenuItem("Laden");
-		itemLoad.addActionListener(new ActionListener(){
+		itemLoad.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				handler.onMenuLoad();
 			}
 		});
 		menuSudoku.add(itemLoad);
-		
+
 		JMenuItem itemSave = new JMenuItem("Speichern");
-		itemSave.addActionListener(new ActionListener(){
+		itemSave.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				handler.onMenuSave();
 			}
 		});
 		menuSudoku.add(itemSave);
-		
+
 		JMenuItem itemCheck = new JMenuItem("Pr\u00fcfen");
-		itemCheck.addActionListener(new ActionListener(){
+		itemCheck.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				handler.onMenuCheck();
 			}
 		});
 		menuSudoku.add(itemCheck);
-		
+
 		menuSudoku.addSeparator();
-		
+
 		JMenuItem itemCredits = new JMenuItem("Credits");
-		itemCredits.addActionListener(new ActionListener(){
+		itemCredits.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				handler.onMenuCredits();
 			}
 		});
 		menuSudoku.add(itemCredits);
-		
+
 		menuSudoku.addSeparator();
-		
+
 		JMenuItem itemScale = new JMenuItem("Skalierung");
-		itemScale.addActionListener(new ActionListener(){
+		itemScale.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				handler.onMenuScale();
 			}
 		});
 		menuSudoku.add(itemScale);
-		
+
 		JMenuItem itemQuit = new JMenuItem("Beenden");
-		itemQuit.addActionListener(new ActionListener(){
+		itemQuit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				handler.onMenuQuit();
 			}
 		});
 		menuSudoku.add(itemQuit);
-		
-		
+
 		JMenu menuSolve = new JMenu("L\u00F6sen");
 		menuBar.add(menuSolve);
-		
+
 		JMenuItem itemSolverStart = new JMenuItem("L\u00F6ser starten");
-		itemSolverStart.addActionListener(new ActionListener(){
+		itemSolverStart.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				handler.onMenuStartSolver();
 			}
 		});
 		menuSolve.add(itemSolverStart);
-		
+
 		JMenuItem itemSolverStop = new JMenuItem("L\u00F6ser stoppen");
-		itemSolverStop.addActionListener(new ActionListener(){
+		itemSolverStop.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				handler.onMenuStopSolver();
 			}
 		});
 		menuSolve.add(itemSolverStop);
-		
+
 		menuSolve.addSeparator();
-		
+
 		checkboxDebug = new JCheckBoxMenuItem("Debug-Modus");
 		menuSolve.add(checkboxDebug);
 	}
@@ -152,19 +150,19 @@ public class MainFrame extends JFrame {
 
 	public void setScale(int scale) {
 		this.scale = scale;
-		
-		int height = (OFFSET_TOP + OFFSET_BOTTOM + 9*FIELD_SIZE + 4*BLOCK_SEPARATOR_WIDTH) * scale + 50;
-		int width = (2*OFFSET_SIDE + 9*FIELD_SIZE + 4*BLOCK_SEPARATOR_WIDTH) * scale;
+
+		int height = (OFFSET_TOP + OFFSET_BOTTOM + 9 * FIELD_SIZE + 4 * BLOCK_SEPARATOR_WIDTH) * scale + 50;
+		int width = (2 * OFFSET_SIDE + 9 * FIELD_SIZE + 4 * BLOCK_SEPARATOR_WIDTH) * scale;
 		this.setSize(width, height);
-		
+
 		repaint();
 	}
-	
-	public Sudoku getSudoku(){
+
+	public Sudoku getSudoku() {
 		return panel.getSudoku();
 	}
-	
-	public void setSudoku(Sudoku sudoku){
+
+	public void setSudoku(Sudoku sudoku) {
 		panel.setSudoku(sudoku);
 		panel.repaint();
 	}
@@ -176,7 +174,7 @@ public class MainFrame extends JFrame {
 	public void setSolver(Solver solver) {
 		this.solver = solver;
 	}
-	
+
 	public boolean isDebugEnabled() {
 		return checkboxDebug.isSelected();
 	}
