@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -21,6 +22,8 @@ public class MainFrame extends JFrame {
 	private SudokuPanel panel;
 	private int scale;
 	private Solver solver;
+	
+	private JCheckBoxMenuItem checkboxDebug;
 	
 	public MainFrame() {
 		
@@ -128,6 +131,10 @@ public class MainFrame extends JFrame {
 		});
 		menuSolve.add(itemSolverStop);
 		
+		menuSolve.addSeparator();
+		
+		checkboxDebug = new JCheckBoxMenuItem("Debug-Modus");
+		menuSolve.add(checkboxDebug);
 	}
 
 	public int getScale() {
@@ -159,5 +166,9 @@ public class MainFrame extends JFrame {
 
 	public void setSolver(Solver solver) {
 		this.solver = solver;
+	}
+	
+	public boolean isDebugEnabled() {
+		return checkboxDebug.isSelected();
 	}
 }

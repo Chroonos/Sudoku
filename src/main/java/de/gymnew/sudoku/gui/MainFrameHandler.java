@@ -204,7 +204,9 @@ public class MainFrameHandler extends MouseAdapter implements SolverWatcher {
 	public void onUpdate(Solver solver, Sudoku sudoku) {
 		frame.setSudoku(sudoku);
 		frame.getContentPane().repaint();
-		// JOptionPane.showMessageDialog(frame, "Pause!"); // TODO Add debug option?
+		if (frame.isDebugEnabled()) {
+			JOptionPane.showMessageDialog(null, "Pause!");
+		}
 	}
 
 	@Override
