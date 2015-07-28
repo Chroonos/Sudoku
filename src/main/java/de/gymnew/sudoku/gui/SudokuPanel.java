@@ -46,6 +46,7 @@ public class SudokuPanel extends JPanel {
 		((Graphics2D) g).setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
 		int field_size = FIELD_SIZE * frame.getScale();
+		int number_offset = NUMBER_OFFSET * frame.getScale();
 		g.setFont(new Font("Arial", Font.PLAIN, NUMBER_SIZE * frame.getScale()));
 
 		for (int block_x = 0; block_x < 3; block_x++) {
@@ -75,10 +76,11 @@ public class SudokuPanel extends JPanel {
 							if (sudoku.getField(field_x + 3 * block_x, field_y + 3 * block_y).isLocked())
 								g.setColor(Color.GRAY);
 							String s = "" + value;
-							g.drawString(s, x + NUMBER_OFFSET * frame.getScale(),
-									y + field_size - NUMBER_OFFSET * frame.getScale());
+							g.drawString(s, x + number_offset,
+									y + field_size - number_offset);
 							g.setColor(Color.BLACK);
 						} else { // Notes
+							int note_offset = NOTE_OFFSET * frame.getScale();
 							Set<Byte> notes = sudoku.getField(field_x + 3 * block_x, field_y + 3 * block_y).getNotes();
 
 							// TODO remove if following method is better
@@ -115,12 +117,9 @@ public class SudokuPanel extends JPanel {
 							} // TODO one unique position for every note?
 
 							g.setFont(new Font("Arial", Font.PLAIN, NOTE_SIZE * frame.getScale()));
-							g.drawString(s1, x + NOTE_OFFSET * frame.getScale(),
-									y + field_size - NOTE_OFFSET * 3 * frame.getScale());
-							g.drawString(s2, x + NOTE_OFFSET * frame.getScale(),
-									y + field_size - NOTE_OFFSET * 2 * frame.getScale());
-							g.drawString(s3, x + NOTE_OFFSET * frame.getScale(),
-									y + field_size - NOTE_OFFSET * frame.getScale());
+							g.drawString(s1, x + note_offset, y + field_size - note_offset * 3);
+							g.drawString(s2, x + note_offset, y + field_size - note_offset * 2);
+							g.drawString(s3, x + note_offset, y + field_size - note_offset);
 							g.setFont(new Font("Arial", Font.PLAIN, NUMBER_SIZE * frame.getScale()));
 
 						}
