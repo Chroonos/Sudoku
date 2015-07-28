@@ -117,9 +117,15 @@ public class Sudoku {
 				}
 			}
 
-			if (!String.valueOf(string.charAt(r + 9)).equals("|")) {
-				throw new IOException("False sign");
+			try{
+				if (!String.valueOf(string.charAt(r + 9)).equals("|")) {
+					throw new IOException("False sign");
+				}
 			}
+			catch(IndexOutOfBoundsException e){
+				throw new IOException();
+			}
+
 		}
 
 		if (!isValid()) {
