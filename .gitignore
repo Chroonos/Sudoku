@@ -1,4 +1,22 @@
-/target/
-/.settings/
-.classpath
-/build/
+# Ignore Everything
+/*
+/*/
+
+# Except These
+!/src/
+!/resources/
+!/examples/
+
+!.gitignore
+!.gitmodules
+
+!README*
+!LICENCE*
+!CONTRIBUTORS*
+!CONTRIBUTING*
+
+!/gradle/
+!build.gradle
+!settings.gradle
+!gradlew
+!gradlew.bat
